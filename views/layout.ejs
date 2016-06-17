@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html ng-app="AriaApp" >
+  <head itemscope itemtype="http://schema.org/WebSite" ng-switch="metadata.title">
+    <!--
+         Meta data description.
+         ==============================
+         Add dynamic metadata description and microdata for
+         - SITE NAME
+    -->
+    <meta name="fragment" content="!"/>
+    <meta title="{{ metadata.title }}"            ng-switch-when="{{metadata_def.title}}"  itemprop='name' />
+    <meta title="{{ metadata.title }}"            ng-switch-default />
+    <meta description="{{ metadata.description}}" ng-if="metadata.description" />
+    <meta whatever="{{ metadata.keywords}}"       ng-if="metadata.keywords" />
+    <link rel="canonical" href="<%=sails.getBaseurl()%>{{metadata.canonical}}" ng-switch-when="{{metadata_def.canonical}}"  itemprop='name' />
+
+    <link rel="canonical" href="<%=sails.getBaseurl()%>{{metadata.canonical}}" ng-switch-default />
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--
+         Add  metadata for pre-render service and  html5Mode
+         - SITE NAME
+    -->
+    <meta name="fragment" content="!">
+    <base href="/">
+
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+	  <header>
+		  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		    <div class="container-fluid">
+		      <!-- Brand and toggle get grouped for better mobile display -->
+		      <div class="navbar-header">
+		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		          <span class="sr-only">Toggle navigation</span>
+		          <span class="icon-bar"></span>
+		          <span class="icon-bar"></span>
+		          <span class="icon-bar"></span>
+		        </button>
+		        <a class="navbar-brand" href="#"><img alt="Aria Projects v.0.01" src="/images/logo.png"></a>
+		      </div>
+			  <!-- Collect the nav links, forms, and other content for toggling -->
+    		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      		  	<ul class="nav navbar-nav">
+       				<li class="active">
+                  <a href="/">
+                    <span class="text-logo"><span class="capital">M</span>illenial<span class="capital">M</span>arketing</span>
+                    <span class="sr-only">(current)</span>
+                  </a>
+              </li>
+        			<li><a href="/post">Posts</a></li>
+					<li><a href="/user">Users</a></li>
+				</ul>
+				<!-- <form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+				    	<input type="text" class="form-control" placeholder="Search">
+				    </div>
+				    <button type="submit" class="btn btn-default">Submit</button>
+				</form> -->
+				<ul class="nav navbar-nav navbar-right">
+						<li ng-show="Token"><a href="#/post/new">New Posts</a></li>
+				    <li class="dropdown">
+				        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login<span class="caret"></span></a>
+				        <ul class="dropdown-menu" role="menu">
+				          	<li ng-hide="Token">
+	  					  	      <form class="navbar-form">
+	  						  	          <div class="form-group"> <input ng-model="email" type="text" placeholder="Email" class="form-control"></div>
+	  						  	          <div class="form-group"> <input ng-model="password" type="password" placeholder="Password" class="form-control"> </div>
+	  						            	<button type="submit" class="btn btn-success" ng-click="signIn()">Sign in</button>
+	  					  	      </form>
+							      </li>
+				            <li ng-show="Token" ><a href="/user/{{currentUser.id}}">{{currentUser.nickname}} Profile</a></li>
+				            <li ng-show="Token" class="divider"> </li>
+				            <li ng-show="Token" ><a href="" ng-click="signOut()">Logout</a></li>
+				          </ul>
+				        </li>
+			    </ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	  </nav>
+    </header>
+
+
+    <%- body %>
+
+
+    <footer class="footer">
+      <div class="container-fluid navbar-inverse">
+		  <div class="row col-lg-12">
+            <h1 class="organization-name"><span class="text-logo"><span class="capital">M</span>illenial<span class="capital">M</span>arketing</span></h1>
+        	<nav>
+            	<ul class="col-lg-3 col-md-3 col-sm-6 list-unstyled">
+                	<li><h2>About</h2></li>
+                	<li><a href="/about/">The Project</a></li>
+                	<li><a href="/for-mac/">For Mac</a></li>
+                	<li><a href="/accounts/pricing/">Pricing</a></li>
+                	<li><a href="http://api.thenounproject.com">API</a></li>
+            	</ul>
+
+            	<ul class="col-lg-3 col-md-3 col-sm-6 list-unstyled" itemscope itemtype="http://schema.org/Organization">
+               		<li><h2>Contact</h2></li>
+                	<li><link itemprop="url" href="<%=sails.getBaseurl()%>">Website</a></li>
+                	<li><a target="_blank" href="http://twitter.com/ilproff77"             itemprop="sameAs">Twitter</a></li>
+                	<li><a target="_blank" href="http://instagram.com/ilproff77"           itemprop="sameAs">Instagram</a></li>
+                	<li><a target="_blank" href="https://facebook.com/millenialsmarketing" itemprop="sameAs">Feedback</a></li>
+                	<li><a href="/jobs/">Jobs</a></li>
+            	</ul>
+
+            	<ul class="col-lg-3 col-md-3 col-sm-6 list-unstyled">
+                	<li><h2>Legal</h2></li>
+                	<li><a href="/legal#terms">Terms of Use</a></li>
+                	<li><a href="/legal#privacy">Privacy Policy</a></li>
+                	<li><a href="/legal#creators">Creators Terms</a></li>
+                	<li><a href="https://thenounproject.zendesk.com/hc/en-us" target="_blank">Frequent Questions</a></li>
+            	</ul>
+
+              <ul class="col-lg-3 col-md-3 col-sm-6 list-unstyled">
+                  <li><h2>Newsletter Subscription</h2></li>
+                  <li>
+                    <form id="email-updates" class="email-signup mailer" action="/mailing-list/subscribe/" name="mc-embedded-subscribe-form" method="post" novalidate="">
+                        <input id="EMAIL" name="email" placeholder="Email Address" type="email">
+                        <label for="EMAIL">To receive our updates via email</label>
+                    </form>
+                  </li>
+              </ul>
+              <div class="clearfix">
+        	</nav>
+      	</div>
+	</div>
+   </footer>
+
+
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/01_angular.min.js"></script>
+    <script src="/js/dependencies/02_jquery/jquery.js"></script>
+    <script src="/js/dependencies/03_angular/angular-NgStore/ngStorage.min.js"></script>
+    <script src="/js/dependencies/03_angular/angular-flow/ng-flow-standalone.min.js"></script>
+    <script src="/js/dependencies/03_angular/angular-resource.min.js"></script>
+    <script src="/js/dependencies/03_angular/angular-route.min.js"></script>
+    <script src="/js/dependencies/04_bootstrap.js"></script>
+    <script src="/js/dependencies/05_sails.io.js"></script>
+    <script src="/js/angular-frontend/app.js"></script>
+    <script src="/js/angular-frontend/controllers.js"></script>
+    <script src="/js/angular-frontend/services.js"></script>
+    <!--SCRIPTS END-->
+
+  </body>
+</html>

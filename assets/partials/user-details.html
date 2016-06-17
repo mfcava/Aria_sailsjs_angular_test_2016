@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+		<h1>{{user.nickname}}'s home</h1>
+		<p><a href="#/user/{{user.id}}/">{{user.nickname}}</a>: {{user.auth.email}}</p>
+		<p><span class="label label-default" ng-repeat="role in user.roles">{{role.name}}</span></p>
+      	<hr>
+      	<div class="col-md-12 panel">
+			<h2>My posts</h2>
+        	<p ng-repeat="post in user.posts" ><a href="#/post/{{post.id}}">{{post.title}}</a></p>
+		</div>
+	</div>
+</div>

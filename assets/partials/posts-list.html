@@ -1,0 +1,78 @@
+<section id="contents_list">
+	<!-- -->
+	<!-- -->
+	<div class="container-fluid" >
+		<div ng-repeat="cover in latestPost | limitTo : 1" id="post.id" class="row home-main-post" ng-style="{'background-image':'url(/api/got/image/'+cover.coverImage+')'}">
+			<div class="col-lg-4 col-lg-offset-1 ribbon">
+				<div class="home_intro">
+					<h2><a href="/post/{{cover.id}}/">{{cover.title}}</a></h2>
+					<h3>article wrote by <a href="/user/{{cover.owned.id}}">{{cover.owned.nickname}}</a></h4>
+
+						<p>{{cover.content | limitTo:postPreviewLimit }}...</p>
+						<center>
+							<a href="/post/{{cover.id}}/"<button type="button" class="btn btn-primary home-cta">Read More</button></a>
+						</center>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+			<!-- -->
+
+			<!-- Other Post -->
+			<div class="home-other-post">
+				<!-- row -->
+				<div class="section" ng-repeat="post in posts" id="post.id">
+					<!-- <div class="first" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+'/small)'}"> -->
+					<div class="first" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}">
+
+						<div class="row {{post.layoutClass}}">
+							<article  class="col-lg-6 col-lg-offset-1 col-lg- section-container" >
+								<h2>
+									<small>article wrote by <a href="/user/{{post.owned.id}}">{{post.owned.nickname}}</a></small><br>
+									<a href="/post/{{post.id}}/">{{post.title}}</a>
+								</h2>
+								<p>{{post.content | limitTo:postPreviewLimit }}... </p>
+								<center>
+									<a href="/post/{{post.id}}/"><button type="button" class="btn btn-primary home-cta">Read More</button></a>
+									<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
+								</center>
+							</article>
+						</div>
+					</div>
+				</div>
+				<!-- row -->
+
+				<!-- Paginator -->
+				<div class="row clearfix">
+					<center>
+						<nav>
+							<ul class="pagination">
+								<li ng-class="{'disabled': currentPage == 0 }" ng-click="setPage('prev')">
+									<a href="" aria-label="Previous" ng-click="prevPostPage()" >
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<!-- -->
+								<!-- -->
+								<li ng-repeat="p in getPostsNumber(pageNumber) track by $index" ng-class="{'active': currentPage == $index }" ><a href="" ng-click="setPage($index)" >{{$index}}</a></li>
+								<!-- -->
+								<!-- -->
+								<li ng-class="{'disabled': currentPage == 1 }">
+									<a href="" aria-label="Next" ng-click="setPage('next')">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</center>
+				</div>
+				<!-- Paginator -->
+
+			</div>
+			<!-- Other Post -->
+
+	</div>
+</section>
+<!-- Mail Signup Form -->
+<!-- Mail Signup Form -->
+<!-- Mail Signup Form -->

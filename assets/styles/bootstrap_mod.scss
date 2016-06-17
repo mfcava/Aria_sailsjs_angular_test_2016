@@ -1,0 +1,53 @@
+.pagination > li > a, .pagination > li > span { background-color: transparent; border:0px; border-radius:0px;}
+.pagination > .active > a, .pagination > .active > a:hover,
+.pagination > .active > a:focus, .pagination > .active > span,
+.pagination > .active > span:hover, .pagination > .active > span:focus {
+    z-index: 3;
+    color: $color_accent;
+    background-color: transparent;
+    border-color: $color_accent;
+    border-bottom: 1px solid;
+    cursor: default;
+    }
+.pagination > .disabled > span, .pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a, .pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    color: $color_disabled;
+    background-color: transparent;
+    border: 0px;
+    cursor: not-allowed;
+    }
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus,.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: transparent;
+    color: $color_backgroud;
+    &:after {
+        transform: scaleX(1);
+    }
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: $color_backgroud;
+    // transition: border 1250ms 250ms ease-in-out;
+ }
+
+ .navbar-inverse .navbar-nav > li > a:after {
+     // transition: border 1250ms 250ms ease-in-out;
+     display: block;
+     content: '';
+     border-bottom: 1px solid $color_accent;
+     transform: scaleX(0.0001);
+     transition: transform 250ms ease-out;
+  }
+
+ .navbar-inverse .navbar-nav > li > a:hover:after {
+     transform: scaleX(1);
+  }
+
+ 

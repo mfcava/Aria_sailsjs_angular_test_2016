@@ -1,0 +1,164 @@
+<section id="home_page" class="home_page">
+	<!-- row -->
+	<div class="row home_banner">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="col-lg-5 ribbon clearfix">
+				<div class="home_intro">
+					<h2>Millenias Marketing</h2>
+					<h3>To invent the future we're rewriting the rules</h3>
+					<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+					<center>
+						<h4>We don't want boring customer</h4>
+						<button type="button" class="btn btn-primary home-cta">Discover more</button>
+						<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
+					</center>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-10 col-lg-offset-1 latest" >
+
+			<!-- Get latest post from blog -->
+			<div class="col-lg-3 latest-wrap clearfix" ng-repeat="post in latestPost" id="home-post-link-id-{{post.id}}">
+				<div class="latest-content col-lg-10">
+					<p><small>{{post.tags[0].name}}</small><a href="/article/{{post.title_slug}}">{{post.title}}</a></p>
+				</div>
+			</div>
+			<!-- Get latest post from blog -->
+
+			<div class="clearfix"></div>
+
+		</div>
+	</div>
+</div>
+
+	<!-- row 2 -->
+	<div class="section">
+		<div class="first">
+			<div class="row white-fade">
+				<div class="col-lg-10 col-lg-offset-1">
+					<div class="col-lg-6 col-lg-offset-6 section-container">
+						<h2>
+							<small>Brand Building</small><br>
+							How millenials are reshaping brand loyalty?
+						</h2>
+						<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+						<center>
+							<button type="button" class="btn btn-primary home-cta">Discover more</button>
+							<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
+						</center>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row 2-->
+
+	<!-- row 3-->
+	<div class="section">
+		<div class="second second-2-1">
+			<div class="row">
+				<div class="col-lg-10 col-lg-offset-1">
+					<div class="col-lg-8 section-container">
+						<h2>
+							<small>Brand Building</small><br>
+							How millenials are reshaping brand loyalty??
+						</h2>
+						<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+						<center>
+							<h4>We don't want boring customer</h4>
+							<button type="button" class="btn btn-primary home-cta">Discover more</button>
+							<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
+						</center>
+					</div>
+
+					<div class="col-lg-4 section-container black-fade">
+						<h2>
+							<small>Brand Building</small><br>
+							How millenials are reshaping brand loyalty??
+						</h2>
+						<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+						<center>
+							<h4>We don't want boring customer</h4>
+							<button type="button" class="btn btn-primary home-cta">Discover more</button>
+							<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
+						</center>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row 3-->
+
+	<!-- row 4-->
+		<div class="section">
+			<div class="latest-posts">
+				<div class="row">
+					<div class="col-lg-10 col-lg-offset-1">
+
+						<!-- Display latest 3 posts -->
+						<div class="home-article-colum-{{post.id}}" ng-repeat="post in latestPost | limitTo:3 " id="home-post-colum-id-{{post.id}}">
+							<div class="col-lg-4 section-container">
+								<h2><small>{{post.tags[0].name}}</small>
+									<span class=" col-lg-12 image clearfix" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+'/50)'}"></span>
+									{{post.title}}</h2>
+								<p>{{post.content | limitTo:postPreviewLimit}}</p>
+
+								<!-- <center>
+									<h4>We don't want boring customer</h4>
+									<button type="button" class="btn btn-primary home-cta">Discover more</button>
+									<p><small>You are in good company (we are: {{users.length}})</small></p>
+								</center> -->
+							</div>
+						</div>
+						<!-- Colum to latest posts -->
+
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- row -->
+		<!-- row
+		<div class="section">
+			<div class="fourth">
+				<div class="row white-fade">
+					<div class="col-lg-8 col-lg-offset-2 section-container">
+						<!-- C1
+						<div class="c1">
+							<div class="col-lg-4">
+								<h2>
+									<small>Brand Building</small><br>
+									How millenials are reshaping brand loyalty?
+								</h2>
+								<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+								<center>
+									<h4>We don't want boring customer</h4>
+									<button type="button" class="btn btn-primary home-cta">Discover more</button>
+									<!-- <p><small>You are in good company (we are: {{users.length}})</small></p>
+								</center>
+							</div>
+						</div> -->
+						<!-- C1
+						<!-- C2
+						<div class="c2">
+							<div class="col-lg-8">
+								<h2>
+									<small>Brand Building</small><br>
+									How millenials are reshaping brand loyalty?
+								</h2>
+								<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+								<center>
+									<h4>We don't want boring customer</h4>
+									<button type="button" class="btn btn-primary home-cta">Discover more</button>
+									<!-- <p><small>You are in good company (we are: {{users.length}})</small></p>
+								</center>
+							</div>
+						</div>
+						<!-- C2
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row -->
+	</section>
+	<div class="clearfix"></div>
