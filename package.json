@@ -20,6 +20,8 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
+    "waterlock":"*",
+    "waterlock-local-auth":"*",
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9"
@@ -33,7 +35,7 @@
     "type": "git",
     "url": "git://github.com/marco/Aria_mac.git"
   },
-  "author": "marco",
+  "author": "Marco F. Cavaliere",
   "license": "",
   "devDependencies": {
     "grunt": "^0.4.5"
