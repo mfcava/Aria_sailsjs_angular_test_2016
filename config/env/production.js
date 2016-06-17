@@ -21,6 +21,7 @@ module.exports = {
   //   connection: 'someMysqlServer'
   // },
   connection: 'localDiskDb',
+  hookTimeout: 30000,
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
