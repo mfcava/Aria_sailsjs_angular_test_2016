@@ -63,7 +63,7 @@ module.exports.connections = {
     // user: 'username', //optional
     // password: 'password', //optional
     database: 'develop_aria_db' //optional
-  }
+  },
   Mongolabs_heroku: {
     adapter: 'sails-mongo',
     url: process.env.MONGOLAB_URI
@@ -84,12 +84,9 @@ module.exports.connections = {
   //   password: 'YOUR_POSTGRES_PASSWORD', // optional
   //   database: 'YOUR_POSTGRES_DB' //optional
   // }
-
-
   /***************************************************************************
   *                                                                          *
   * More adapters: https://github.com/balderdashy/sails                      *
   *                                                                          *
   ***************************************************************************/
-
 };
