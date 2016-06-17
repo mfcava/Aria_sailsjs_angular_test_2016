@@ -32,7 +32,7 @@ module.exports.http = {
 //app.use(require('prerender-node').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'));
 
   // prerender: require('prerender-node').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'),
-  prerender: require('prerender-node').set('prerenderServiceUrl', 'http://localhost:1337/').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'),
+  // prerender: require('prerender-node').set('prerenderServiceUrl', 'http://localhost:1337/').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'),
 
 
     order: [
@@ -42,7 +42,7 @@ module.exports.http = {
        'myRequestLogger',
        'bodyParser',
        'handleBodyParserError',
-       'prerender-node',
+       // 'prerender-node',
        'compress',
        'methodOverride',
        'poweredBy',
