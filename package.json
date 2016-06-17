@@ -22,6 +22,7 @@
     "include-all": "~0.1.6",
     "waterlock":"*",
     "waterlock-local-auth":"*",
+    "bower": "*",
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9"
