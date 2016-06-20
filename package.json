@@ -22,6 +22,7 @@
     "include-all": "~0.1.6",
     "waterlock":"*",
     "waterlock-local-auth":"*",
+    "gm":"*",
     "bower": "*",
     "grunt-contrib-sass": "*",
     "rc": "1.0.1",
