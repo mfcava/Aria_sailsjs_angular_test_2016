@@ -20,7 +20,7 @@ module.exports = {
   // models: {
   //   connection: 'someMysqlServer'
   // },
-  connection: 'Mongolabs_heroku',
+  connection: 'localDiskDb',
   hookTimeout: 120000,
   /***************************************************************************
    * Set the port in the production environment to 80                        *
