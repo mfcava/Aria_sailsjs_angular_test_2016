@@ -1,1 +1,1 @@
-sails lift
+node start
