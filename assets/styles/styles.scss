@@ -2,10 +2,10 @@
   Generic Styles -  used in more that 1 page
 ---------------------------------------------------------------------------- */
 
-@font-face { font-family: Brandon_Bold;   src: url(/fonts/Brandon/Brandon_bld.otf)};
-@font-face { font-family: Brandon_Light;  src: url(/fonts/Brandon/Brandon_light.otf)};
-@font-face { font-family: Brandon_Medium; src: url(/fonts/Brandon/Brandon_med.otf)};
-@font-face { font-family: Brandon_Bulk;   src: url(/fonts/Brandon/Brandon_blk.otf)};
+@font-face { font-family: Brandon_Bold;   src: url(/fonts/brandon/Brandon_bld.otf)};
+@font-face { font-family: Brandon_Light;  src: url(/fonts/brandon/Brandon_light.otf)};
+@font-face { font-family: Brandon_Medium; src: url(/fonts/brandon/Brandon_med.otf)};
+@font-face { font-family: Brandon_Bulk;   src: url(/fonts/brandon/Brandon_blk.otf)};
 
 $color_backgroud: #FFF;
 $color_backgroud_contrast: darken($color_backgroud,10%);
@@ -330,7 +330,7 @@ button {font-family: 'Brandon_light', 'sans';}
                     rgba(0,0,0,0.69) 63%,
                     rgba(0,0,0,0.69) 100%);
                 .black-fade {
-                    background-color: transparent; 
+                    background-color: transparent;
                 }
             }
         }
