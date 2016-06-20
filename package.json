@@ -39,7 +39,7 @@
     "url": "git://github.com/marco/Aria_mac.git"
   },
   "author": "Marco F. Cavaliere",
-  "license": "",
+  "license": "N/A",
   "devDependencies": {
     "grunt": "^0.4.5"
   }
