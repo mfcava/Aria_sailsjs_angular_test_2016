@@ -67,9 +67,10 @@ module.exports.connections = {
 
   Mongolabs_heroku: {
     adapter: 'sails-mongo',
-    url: process.env.MONGOLAB_URI
+    url: process.env.MONGODB_URI,
+    database: 'production_aria_db'
   }
-  
+
   /***************************************************************************
   *                                                                          *
   * PostgreSQL is another officially supported relational database.          *
