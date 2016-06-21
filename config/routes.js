@@ -55,10 +55,5 @@ module.exports.routes = {
       action: 'show',
       skipAssets: true
   },
-'/post' : '/#/post',
-'/user' : '/#/user',
-//'/post/' : '/#/post/',
-//'/user/' : '/#/user/',
-'/article' : '/#/article'
 
 };
