@@ -71,12 +71,12 @@ AriaApp.run(['$rootScope','$localStorage','$location','$analytics', function($ro
 
 	$rootScope.$on('newPageLoaded', function(event, metadata) {
 		$rootScope.metadata = metadata;
-		setTimeout(function(){ $analytics.pageTrack() }, 1000);
+		setTimeout(function(){ $analytics.pageTrack($location.path() ) }, 1000);
 	});
 
-	$rootScope.$on('routeChangeSuccess', function(event, metadata) {
-		setTimeout(function(){ $analytics.pageTrack() }, 10);
-	});
+	//$rootScope.$on('routeChangeSuccess', function(event, metadata) {
+	//	setTimeout(function(){ $analytics.pageTrack($location.path()+'/' ) }, 10);
+	//});
 
 } ]);
 
