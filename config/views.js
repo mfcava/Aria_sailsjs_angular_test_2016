@@ -11,6 +11,18 @@
  * http://sailsjs.org/#!/documentation/concepts/Views
  */
 
+var minify = require('html-minifier').minify;
+var ejs = require('ejs-locals');
+var parsing = function(path,options,fn) {
+    options.locals = options.locals || {};
+    options.locals._layoutFile = 'layout.ejs';
+    ejs(path, options, function(err, str){
+        str = minify(str,{collapseWhitespace: true, removeComments: true});
+        return fn(err, str);
+    });
+
+};
+
 module.exports.views = {
 
   /****************************************************************************
@@ -30,7 +42,10 @@ module.exports.views = {
   *                                                                           *
   ****************************************************************************/
 
-  engine: 'ejs',
+  engine: {
+    ext: 'ejs',
+    fn: parsing
+  },
 
 
   /****************************************************************************
@@ -76,6 +91,8 @@ module.exports.views = {
   ****************************************************************************/
 
   layout: 'layout',
+  // layout: false,
+
 
   /****************************************************************************
   *                                                                           *

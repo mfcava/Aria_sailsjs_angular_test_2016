@@ -16,8 +16,12 @@ module.exports = function(grunt) {
     'clean:dev',
     'jst:dev',
     'less:dev',
-    // Add for SASS compiling
-    'sass:dev',
+    // --- Custom tasks
+        // Add for SASS compiling
+        'sass:dev',
+        // Add for HTML minify
+        'htmlmin:dev',
+    // --- End Custom tasks
     'copy:dev',
     'coffee:dev'
   ]);

@@ -6,11 +6,11 @@
 			<div class="col-lg-4 col-lg-offset-1 ribbon">
 				<div class="home_intro">
 					<h2><a href="/post/{{cover.id}}/">{{cover.title}}</a></h2>
-					<h3>article wrote by <a href="/user/{{cover.owned.id}}">{{cover.owned.nickname}}</a></h4>
+					<h3>article wrote by <a href="/user/{{cover.owned.id}}">{{cover.owned.nickname}}</a></h3>
 
 						<p>{{cover.content | limitTo:postPreviewLimit }}...</p>
 						<center>
-							<a href="/post/{{cover.id}}/"<button type="button" class="btn btn-primary home-cta">Read More</button></a>
+							<a href="/post/{{cover.id}}/"><button type="button" class="btn btn-primary home-cta">Read More</button></a>
 						</center>
 					</div>
 				</div>
@@ -28,10 +28,10 @@
 						<div class="row {{post.layoutClass}}">
 							<article  class="col-lg-6 col-lg-offset-1 col-lg- section-container" >
 								<h2>
-									<small>article wrote by <a href="/user/{{post.owned.id}}">{{post.owned.nickname}}</a></small><br>
+									<small>article wrote by <a href="/user/{{post.owned.id}}">{{post.owned.nickname}}</a></small></br>
 									<a href="/post/{{post.id}}/">{{post.title}}</a>
 								</h2>
-								<p>{{post.content | limitTo:postPreviewLimit }}... </p>
+								<p>{{post.content | limitTo:postPreviewLimit }}...</p>
 								<center>
 									<a href="/post/{{post.id}}/"><button type="button" class="btn btn-primary home-cta">Read More</button></a>
 									<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
@@ -54,7 +54,9 @@
 								</li>
 								<!-- -->
 								<!-- -->
-								<li ng-repeat="p in getPostsNumber(pageNumber) track by $index" ng-class="{'active': currentPage == $index }" ><a href="" ng-click="setPage($index)" >{{$index}}</a></li>
+								<li ng-repeat="p in getPostsNumber(pageNumber) track by $index" ng-class="{'active': currentPage == $index }" >
+									<a href="" ng-click="setPage($index)" >{{$index}}</a>
+								</li>
 								<!-- -->
 								<!-- -->
 								<li ng-class="{'disabled': currentPage == 1 }">
