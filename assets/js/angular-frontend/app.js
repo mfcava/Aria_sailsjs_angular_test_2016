@@ -9,7 +9,9 @@ var AriaApp = angular.module('AriaApp', [
 	'ngStorage',
 	'AriaControllers',
 	'AriaServices',
-	'AriaDirective'
+	'AriaDirective',
+	'angulartics',
+	'angulartics.google.analytics'
 ]);
 
 
@@ -97,7 +99,7 @@ AriaApp.run(['$rootScope','$localStorage', '$location', function($rootScope, $lo
 // AriaApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 //	  $routeProvider.
 
-AriaApp.config(['$routeProvider', '$locationProvider','$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+AriaApp.config(['$routeProvider', '$locationProvider','$httpProvider','$analyticsProvider', function($routeProvider, $locationProvider, $httpProvider,$analyticsProvider) {
 	$locationProvider.html5Mode(true);
 	$routeProvider
 	.when('/', {
