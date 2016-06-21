@@ -87,6 +87,15 @@
 								<input type="text" class="form-control" id="name" placeholder="Insert Post Title..." value="{{post.title}}" ng-model="post.title">
 							</div>
 
+							<div class="checkbox" ng-switch="post.homePage">
+								<label>
+									<input type="hidden" name="homePage" value="false">
+							    	<input ng-switch-when="true" type="checkbox"  name="homePage" ng-model="post.homePage" value="true" checked >
+									<input ng-switch-default     type="checkbox"  name="homePage" ng-model="post.homePage" value="true" >
+									Show Post in Home Page
+							    </label>
+							</div>
+
 							<!-- content -->
 							<div class="form-group body">
 								<label for="postContent">Body</label>

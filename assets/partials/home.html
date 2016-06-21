@@ -18,7 +18,7 @@
 		<div class="col-lg-10 col-lg-offset-1 latest" >
 
 			<!-- Get latest post from blog -->
-			<div class="col-lg-3 latest-wrap clearfix" ng-repeat="post in latestPost" id="home-post-link-id-{{post.id}}">
+			<div class="col-lg-3 latest-wrap clearfix" ng-repeat="post in homePosts" id="home-post-link-id-{{post.id}}">
 				<div class="latest-content col-lg-10">
 					<p><small>{{post.tags[0].name}}</small><a href="/article/{{post.title_slug}}">{{post.title}}</a></p>
 				</div>
@@ -96,7 +96,7 @@
 					<div class="col-lg-10 col-lg-offset-1">
 
 						<!-- Display latest 3 posts -->
-						<div class="home-article-colum-{{post.id}}" ng-repeat="post in latestPost | limitTo:3 " id="home-post-colum-id-{{post.id}}">
+						<div class="home-article-colum-{{post.id}}" ng-repeat="post in latestPosts | limitTo:3 " id="home-post-colum-id-{{post.id}}">
 							<div class="col-lg-4 section-container">
 								<h2><small>{{post.tags[0].name}}</small>
 									<span class=" col-lg-12 image clearfix" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+'/50)'}"></span>

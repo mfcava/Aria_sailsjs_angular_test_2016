@@ -16,12 +16,18 @@ AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post 
         'description': 'Marketing for millenials brand',
 		'keywords': 'Marketing, Millenials, Brands',
     });
-    $scope.hometag = 'marketing';
 
     $scope.postPreviewLimit = 350;
     $scope.sortBy = 'createdAt DESC';
-    $scope.latestPost = Post.query({skip: 0 ,limit: 4, sort: $scope.sortBy } );
+    $scope.homePosts   = Post.query({skip: 0 ,limit: 4, sort: $scope.sortBy, where: '{"homePage":{"contains":"true"}}' } );
+    $scope.latestPosts = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePage": [null,"false"]}' } );
 
+    { or:
+        [
+            { "homePage" : "false"},
+            {"homePage" : null }
+        ]
+    }
 
 } ]);
 
