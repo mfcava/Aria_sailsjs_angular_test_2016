@@ -46,7 +46,7 @@ var AriaApp = angular.module('AriaApp', [
 // ----                                                                     ---
 // ---- ------------------------------------------------------------------- ---
 
-AriaApp.run(['$rootScope','$localStorage', '$location', function($rootScope, $localStorage, $location) {
+AriaApp.run(['$rootScope','$localStorage','$location','$analytics', function($rootScope,$localStorage,$location,$analytics) {
 	if ($localStorage.Token)
 		$rootScope.Token = $localStorage.Token;
 
@@ -68,8 +68,14 @@ AriaApp.run(['$rootScope','$localStorage', '$location', function($rootScope, $lo
 		'canonical': '/'
 	};
 	$rootScope.metadata = $rootScope.metadata_def
+
 	$rootScope.$on('newPageLoaded', function(event, metadata) {
-		$rootScope.metadata = metadata
+		$rootScope.metadata = metadata;
+		setTimeout(function(){ $analytics.pageTrack() }, 1000);
+	});
+
+	$rootScope.$on('routeChangeSuccess', function(event, metadata) {
+		setTimeout(function(){ $analytics.pageTrack() }, 10);
 	});
 
 } ]);
@@ -99,8 +105,9 @@ AriaApp.run(['$rootScope','$localStorage', '$location', function($rootScope, $lo
 // AriaApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 //	  $routeProvider.
 
-AriaApp.config(['$routeProvider', '$locationProvider','$httpProvider','$analyticsProvider', function($routeProvider, $locationProvider, $httpProvider,$analyticsProvider) {
+AriaApp.config(['$routeProvider','$locationProvider','$httpProvider','$analyticsProvider', function( $routeProvider, $locationProvider, $httpProvider, $analyticsProvider ) {
 	$locationProvider.html5Mode(true);
+	$analyticsProvider.virtualPageviews(false);
 	$routeProvider
 	.when('/', {
 		templateUrl: '/partials/home.html',
@@ -135,8 +142,11 @@ AriaApp.config(['$routeProvider', '$locationProvider','$httpProvider','$analytic
 	// --- ---------------------------------------------- ---
 	.otherwise({
 		redirectTo: '/',
-		controller: 'AriaCtrl'
-		});
+		controller: 'AriaCtrl'});
+
+
+
+
 
 
 	// ---- ------------------------------------------------------------------- ---

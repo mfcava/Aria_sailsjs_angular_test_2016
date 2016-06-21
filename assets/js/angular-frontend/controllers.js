@@ -10,7 +10,7 @@ var AriaControllers = angular.module('AriaControllers', ['flow']);
 
 
 AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post ) {
-    console.log('Controller.js - Root Controller');
+    // console.log('Controller.js - Root Controller');
     $scope.$emit('newPageLoaded', {
         'title': 'Millenials Marketing',
         'description': 'Marketing for millenials brand',
