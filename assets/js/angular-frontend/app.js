@@ -112,6 +112,9 @@ AriaApp.config(['$routeProvider', '$locationProvider','$httpProvider', function(
 	.when('/post', {
 		templateUrl: '/partials/posts-list.html',
 		controller:  'PostsCtrl' })
+	.when('/post/new', {
+		templateUrl: '/partials/post-edit.html',
+		controller:  'PostEditCtrl'	})
 	.when('/post/:PostId', {
 		templateUrl: '/partials/post-details.html',
 		controller:  'PostShowCtrl' })

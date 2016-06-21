@@ -185,10 +185,14 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
     // ---- ------------------------------------------------------------------- ---
     AriaControllers.controller('PostEditCtrl', ['$scope', '$routeParams', 'Post', 'Metatag', '$location', 'flash', '$http', function($scope, $routeParams, Post, Metatag, $location, flash, $http ) {
         $scope.flash = flash;
-        $scope.post = Post.get({PostId: $routeParams.PostId});
+        console.log('Controller.js');
+        if ( angular.isUndefined($routeParams.PostId) ) {
+            $scope.post = new Post();
+        } else {
+            $scope.post = Post.get({PostId: $routeParams.PostId});
+        }
         $scope.autocompleteTags = false;
         $scope.searchTag = '';
-
         // callback for ng-click 'deletePost':
         $scope.deletePost = function () {
             $scope.post.$delete({ PostId: $scope.post.id });
@@ -205,7 +209,7 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
         $scope.savePost = function () {
             $scope.post.$save({ PostId: $scope.post.id }).then(function (post) {
                 flash.setMessage("Saved!");
-                $location.path("/post/"+$routeParams.PostId);
+                $location.path("/post/"+post.id);
             });
         };
 
