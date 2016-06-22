@@ -29,20 +29,14 @@ module.exports.http = {
   * router is invoked by the "router" middleware below.)                     *
   *                                                                          *
   ***************************************************************************/
-  //app.use(require('prerender-node').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'));
-  // prerender: require('prerender-node').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'),
-  // prerender: require('prerender-node').set('prerenderServiceUrl', 'http://localhost:1337/').set('prerenderToken', 'ttkjz0dTj26l8YwSm8dV'),
-
 
     order: [
         'redirectToRoutes',
         'startRequestTimer',
         'cookieParser',
         'session',
-        //'myRequestLogger',
         'bodyParser',
         'handleBodyParserError',
-        // 'prerender-node',
         'compress',
         'methodOverride',
         'poweredBy',
@@ -111,5 +105,5 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-  // cache: 31557600000
+  cache: 7200000
 };
