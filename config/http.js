@@ -35,35 +35,52 @@ module.exports.http = {
 
 
     order: [
-       'startRequestTimer',
-       'cookieParser',
-       'session',
-       //'myRequestLogger',
-       'bodyParser',
-       'handleBodyParserError',
-       // 'prerender-node',
-       'compress',
-       'methodOverride',
-       'poweredBy',
-       '$custom',
-       'router',
-       'www',
-       'favicon',
-       '404',
-       '500'
-       ]
+        'redirectToRoutes',
+        'startRequestTimer',
+        'cookieParser',
+        'session',
+        //'myRequestLogger',
+        'bodyParser',
+        'handleBodyParserError',
+        // 'prerender-node',
+        'compress',
+        'methodOverride',
+        'poweredBy',
+        '$custom',
+        'router',
+        'www',
+        'favicon',
+        '404',
+        '500'
+    ],
 
-  /****************************************************************************
-  *                                                                           *
-  * Example custom middleware; logs each request to the console.              *
-  *                                                                           *
-  ****************************************************************************/
+/****************************************************************************
+*                                                                           *
+* Example custom middleware; logs each request to the console.              *
+*                                                                           *
+****************************************************************************/
 
     // myRequestLogger: function (req, res, next) {
     //     console.log("Requested :: ", req.method, req.url);
     //     return next();
     // }
-
+    redirectToRoutes: function(req, res, next) {
+        var originalUrl = req.originalUrl;
+        if ( originalUrl.match(/^\/?post\/?/i)    ||
+             originalUrl.match(/^\/?user\/?/i)    ||
+             originalUrl.match(/^\/?article\/.+/i) )
+            {
+            newUrl = req.protocol + '://' + req.get('host') +'/#/' +req.originalUrl;
+            res.redirect(301, newUrl);
+            }
+        else if (originalUrl.match(/^\/?article$/i) ){
+            newUrl = req.protocol + '://' + req.get('host') +'/#/post';
+            res.redirect(301, newUrl);
+        }
+        else {
+            next();
+        }
+    },
 
   /***************************************************************************
   *                                                                          *
