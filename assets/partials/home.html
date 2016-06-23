@@ -18,7 +18,7 @@
 		<div class="col-lg-10 col-lg-offset-1 latest" >
 
 			<!-- Get latest post from blog -->
-			<div class="col-lg-3 latest-wrap clearfix" ng-repeat="post in homePosts" id="home-post-link-id-{{post.id}}">
+			<div class="col-lg-3 latest-wrap clearfix" ng-repeat="post in homePosts | limitTo:4" id="home-post-link-id-{{post.id}}">
 				<div class="latest-content col-lg-10">
 					<p><small>{{post.tags[0].name}}</small><a href="/article/{{post.title_slug}}">{{post.title}}</a></p>
 				</div>
@@ -33,19 +33,20 @@
 
 	<!-- row 2 -->
 	<div class="section">
-		<div class="first">
+		<div class="first" ng-repeat="post in homePosts | limitTo:1" id="home-post-link-id-{{post.id}}" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}">
 			<div class="row white-fade">
 				<div class="col-lg-10 col-lg-offset-1">
 					<div class="col-lg-6 col-lg-offset-6 section-container">
 						<h2>
-							<small>Brand Building</small><br>
-							How millenials are reshaping brand loyalty?
+							<small>{{post.tags[0].name}}</small><br>
+							{{post.title}}
 						</h2>
-						<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
-						<center>
-							<button type="button" class="btn btn-primary home-cta">Discover more</button>
-							<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
-						</center>
+						<p>{{post.content | limitTo:postPreviewLimit}}</p>
+						<a href="/article/{{post.title_slug}}">
+							<button type="button" class="btn btn-primary home-cta">
+								Read More
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -55,33 +56,33 @@
 
 	<!-- row 3-->
 	<div class="section">
-		<div class="second second-2-1">
+		<div class="second second-2-1" ng-repeat="post in homePosts | limitTo:2" ng-if="$index > 0" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}" >
 			<div class="row">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="col-lg-8 section-container">
+					<div class="col-lg-8 section-container {{p.layoutClass}}" ng-repeat="p in homePosts | limitTo:2" ng-if="$index > 0" >
 						<h2>
-							<small>Brand Building</small><br>
-							How millenials are reshaping brand loyalty??
+							<small>{{p.tags[0].name}}</small><br>
+							{{p.title}}
 						</h2>
-						<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
-						<center>
-							<h4>We don't want boring customer</h4>
-							<button type="button" class="btn btn-primary home-cta">Discover more</button>
-							<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
-						</center>
+						<p>{{p.content | limitTo:postPreviewLimit}}</p>
+						<a href="/article/{{p.title_slug}}">
+							<button type="button" class="btn btn-primary home-cta">
+								Read More
+							</button>
+						</a>
 					</div>
 
-					<div class="col-lg-4 section-container black-fade">
+					<div class="col-lg-4 section-container black-fade {{p.layoutClass}}" ng-repeat="p in homePosts | limitTo:3" ng-if="$index > 1" >
 						<h2>
-							<small>Brand Building</small><br>
-							How millenials are reshaping brand loyalty??
+							<small>{{p.tags[0].name}}</small><br>
+							{{p.title}}
 						</h2>
-						<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
-						<center>
-							<h4>We don't want boring customer</h4>
-							<button type="button" class="btn btn-primary home-cta">Discover more</button>
-							<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
-						</center>
+						<p>{{p.content | limitTo:postPreviewLimit}}</p>
+						<a href="/article/{{p.title_slug}}">
+							<button type="button" class="btn btn-primary home-cta">
+								Read More
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -100,7 +101,8 @@
 							<div class="col-lg-4 section-container">
 								<h2><small>{{post.tags[0].name}}</small>
 									<span class=" col-lg-12 image clearfix" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+'/50)'}"></span>
-									{{post.title}}</h2>
+									<a href="/article/{{post.title_slug}}">{{post.title}}</a>
+								</h2>
 								<p>{{post.content | limitTo:postPreviewLimit}}</p>
 
 								<!-- <center>

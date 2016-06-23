@@ -17,7 +17,7 @@
 						<div class="panel-heading"><h3 class="panel-title">Upload Cover Image</h3>
 						</div>
 						<div class="panel-body">
-							<div flow-init="{target: '/file/upload', testChunks:false }" flow-files-submitted="$flow.upload()" flow-file-success="changeImageName($message); $file.msg = $message;">
+							<div flow-init="{target: '/api/file/upload', testChunks:false }" flow-files-submitted="$flow.upload()" flow-file-success="changeImageName($message); $file.msg = $message;">
 								<span class="btn btn-default" flow-btn>Upload File</span>
 								<table class="debug">
 									<tr ng-repeat="file in $flow.files">

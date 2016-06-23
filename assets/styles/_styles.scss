@@ -7,19 +7,19 @@
 @font-face { font-family: Brandon_Medium; src: url(/fonts/brandon/Brandon_med.otf)};
 @font-face { font-family: Brandon_Bulk;   src: url(/fonts/brandon/Brandon_blk.otf)};
 
-$color_backgroud: #FFF;
+$color_backgroud: $body-bg;
 $color_backgroud_contrast: darken($color_backgroud,10%);
-$color_accent: #337ab7;
+$color_accent: $brand-primary;
 $color_disabled: #777;
 
 $color_home_main_post_background: $color_backgroud ;
 $color_home_main_post_accent: $color_accent;
 
-$color_post_detail_background: #fefefe;
-$color_post_detail_accent: #337AB7;
+$color_post_detail_background: $body-bg;
+$color_post_detail_accent: $color_accent;
 
 $font-color: #000;
-$font-color-light: #FFF;
+$font-color-light: $body-bg;
 
 .post-tag      { margin-right: 0.5em; margin-bottom: 1em;}
 .sign-up       { background: $color_backgroud_contrast; padding-bottom: 2rem;}
@@ -192,7 +192,7 @@ button {font-family: 'Brandon_light', 'sans';}
             //box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
             //outline-color: rgba(255, 255, 255, 0);
             //outline-offset: 15px;
-            text-shadow: 1px 1px 2px #427388;
+            // text-shadow: 1px 1px 2px #427388;
             background-color: rgba($color_accent, 0.8);
             box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 4px 8px rgba(0,0,0,0.22);
         }
@@ -333,7 +333,6 @@ button {font-family: 'Brandon_light', 'sans';}
                 }
             }
         }
-        .first {background-image: url('/images/home-section-1.jpg');}
         .second {
             background-image: url('/images/home-section-2.jpg');
             background-size: cover;

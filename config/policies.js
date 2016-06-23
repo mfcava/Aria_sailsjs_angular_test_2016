@@ -39,7 +39,8 @@ module.exports.policies = {
 		  jwt: true
 		  },
 	FileController: {
-		showImage: true
+		showImage: true,
+		upload: true
 		}
 
   /***************************************************************************

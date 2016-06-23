@@ -2,7 +2,7 @@
 	<!-- -->
 	<!-- -->
 	<div class="container-fluid" >
-		<div ng-repeat="cover in latestPost | limitTo : 1" id="post.id" class="row home-main-post" ng-style="{'background-image':'url(/api/got/image/'+cover.coverImage+')'}">
+		<div ng-repeat="cover in latestPost | limitTo:1" id="post.id" class="row home-main-post" ng-style="{'background-image':'url(/api/got/image/'+cover.coverImage+')'}">
 			<div class="col-lg-4 col-lg-offset-1 ribbon">
 				<div class="home_intro">
 					<h2><a href="/post/{{cover.id}}/">{{cover.title}}</a></h2>
