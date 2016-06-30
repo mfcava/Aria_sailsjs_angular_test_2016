@@ -53,6 +53,9 @@ AriaApp.run(['$rootScope','$localStorage','$location','$analytics', function($ro
 	if ($localStorage.currentUser)
 		$rootScope.currentUser = $localStorage.currentUser;
 
+	if ($localStorage.TokenId )
+		$rootScope.TokenId = $localStorage.TokenId;
+
 	$rootScope.password = '';
 	$rootScope.email    = '';
 	// $rootScope.location = $location;
@@ -158,11 +161,14 @@ AriaApp.config(['$routeProvider','$locationProvider','$httpProvider','$analytics
 		return {
 			'request': function (config) {
 				config.headers = config.headers || {};
-				// console.log("App.js: currentUser: "+$rootScope.currentUser);
+				// console.log("App.js: currentUser: ");
+				// console.log($rootScope.currentUser);
+				// console.log("App.js: TokenID: ");
+				// console.log($rootScope.TokenId);
 				// console.log("App.js: Insert Token in Header");
 				if ($localStorage.Token || $rootScope.Token ) {
 					$localStorage.Token = $rootScope.Token;
-					// console.log("App.js: Token -> "+ $localStorage.Token);
+				    // console.log("App.js: Token -> "+ $localStorage.Token);
 					config.headers = {'access_token': $localStorage.Token}
 				}
 				return config;

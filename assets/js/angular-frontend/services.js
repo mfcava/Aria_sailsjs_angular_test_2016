@@ -1,5 +1,32 @@
+// ---- ------------------------------------------------------------------- ---
+// ----                                                                     ---
+// ----                                                                     ---
+// ---- Init Service and Helpers                                            ---
+// ----                                                                     ---
+// ----                                                                     ---
+// ---- ------------------------------------------------------------------- ---
+
+
+
 var AriaServices  = angular.module('AriaServices', ['ngResource']);
 var AriaDirective = angular.module('AriaDirective', []);
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---- ---------------------------------------------------------------- ---
+    // ----                                                                  ---
+    // ---- Routes and Resources                                             ---
+    // ----                                                                  ---
+    // ---- ---------------------------------------------------------------- ---
 
 	AriaServices.factory('Post', ['$resource',
     	function($resource){
@@ -38,6 +65,14 @@ var AriaDirective = angular.module('AriaDirective', []);
 
 
 
+
+
+	// ---- ---------------------------------------------------------------- ---
+    // ----                                                                  ---
+    // ---- Factory Service for flash message on page Reload                 ---
+    // ----                                                                  ---
+    // ---- ---------------------------------------------------------------- ---
+
 	AriaServices.factory("flash", ['$rootScope', function($rootScope) {
 		var queue = [];
 		var currentMessage = "";
@@ -53,84 +88,147 @@ var AriaDirective = angular.module('AriaDirective', []);
 	}]);
 
 
-    /* **************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    ************************************************************************** */
 
-    /* *********************************************************************** */
+
+
+	// ---- ---------------------------------------------------------------- ---
+    // ----                                                                  ---
+    // ----  Service Login and Logout                                        ---
+    // ----                                                                  ---
+    // ---- ---------------------------------------------------------------- ---
+
+
+
+
+	// ---- ---------------------------------------------------------------- ---
+    // ---- LONGIN                                                           ---
+    // ---- ---------------------------------------------------------------- ---
 
 	AriaServices.run(['$rootScope', '$http', function($rootScope, $http) {
 	    $rootScope.signIn = function() {
-			    var formData = {
-			        email:    $rootScope.email,
-			        password: $rootScope.password
-			        };
-			    $http({
-				      method: 'POST',
-				      url: '/api/auth/login',
-				      data: formData,
-				      headers: {'Content-Type': 'application/form-data'}
-				      }).
-					    success(function(data, status, headers, config) {
-						      // console.log('Services.js - signIn - data:');
-                  // console.log(data.access_token);
-                  $rootScope.setToken(data);
-                  console.log('Services.js - signIn: Login Success!');
-			            }).
-			        error(function(data, status, headers, config) {
-						      $rootScope.error = 'Invalid credentials';
-			    		    // called asynchronously if an error occurs
-			    		    // or server returns response with an error status.
-			    	      });
-          }
+			var formData = {
+			    email:    $rootScope.email,
+			    password: $rootScope.password
+			};
+			$http({
+				method: 'POST',
+			    url: '/api/auth/login',
+			    data: formData,
+			    headers: {'Content-Type': 'application/form-data'}
+			})
+			.success(function(data, status, headers, config) {
+				// console.log('Services.js - signIn - data:');
+            	// console.log(data.access_token);
+            	$rootScope.setToken(data);
+        		console.log('Services.js - signIn: Login Success!');
+		    })
+			.error(function(data, status, headers, config) {
+				console.log('Services.js - signIn: some problems!');
+				$rootScope.error = 'Invalid credentials';
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+			});
+        }
 	} ]);
 
-	AriaServices.run([ '$rootScope','$localStorage', function($rootScope,$localStorage) {
-			$rootScope.setToken = function(data) {
-				 console.log(data);
-				 $localStorage.Token = data.access_token;
-				 // console.log('Services.js - setToken: -id');
-				 console.log(data.user);
-				 $localStorage.currentUser = data.user;
-				 }
-			} ]);
+	AriaServices.run([ '$rootScope','$localStorage','$http', function($rootScope,$localStorage,$http) {
+		$rootScope.setToken = function(data) {
+			// console.log(data);
+			$localStorage.Token = data.access_token;
+			// console.log($localStorage.Token);
+			// console.log(data.user);
+			$localStorage.currentUser = data.user;
+			$localStorage.TokenId = '';
 
-    /* *********************************************************************** */
+			$rootScope.Token = data.access_token;
+			$rootScope.currentUser = data.user;
+			$rootScope.TokenId = '';
+
+			$http({
+				method: 'GET',
+				url: '/api/user/'+data.user.id+'/jsonWebTokens/',
+				headers: {'Content-Type': 'application/form-data'}
+			})
+			.success(function(tokens, status, headers, config) {
+				// Get TokenID for Logout remove;
+				angular.forEach(tokens, function(token, key) {
+					if (String(token.token) === String(data.access_token)) {
+						$localStorage.TokenId = token.id;
+						$rootScope.TokenId = token.id;
+						}
+				});
+			})
+			.error(function(data, status, headers, config) {
+				$rootScope.error = 'Invalid credentials';
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+			});
+		}
+	} ]);
+
+	// ---- ---------------------------------------------------------------- ---
+    // ---- LOGOUT                                                           ---
+    // ---- ---------------------------------------------------------------- ---
 
 	AriaServices.run( [ '$rootScope', '$http', function($rootScope, $http) {
 	    $rootScope.signOut = function() {
 			$http({
-				 method: 'GET',
-				    url: '/api/auth/logout',
+				method: 'GET',
+				url: '/api/auth/logout',
 				headers: {'Content-Type': 'application/form-data'}
-				}).
-					success(function(data, status, headers, config) {
-						$rootScope.removeToken(data.token);
-			    	}).
-			    error(function(data, status, headers, config) {
-						$rootScope.error = 'Servie.js - SignOut: Something bad here...';
-			    		// called asynchronously if an error occurs
-			    		// or server returns response with an error status.
-			    	});
-            }
+				})
+			.success(function(data, status, headers, config) {
+				$http({
+					method: 'DELETE',
+					url: '/api/user/'+$rootScope.currentUser.id+'/jsonWebTokens/'+$rootScope.TokenId,
+					headers: {'Content-Type': 'application/form-data'}
+					})
+				.success(function(data, status, headers, config) {
+					$rootScope.removeToken();
+				})
+				.error(function(data, status, headers, config) {
+					$rootScope.error = 'Servie.js - SignOut: Something bad here...';
+					// called asynchronously if an error occurs
+					// or server returns response with an error status.
+				});
+			})
+			.error(function(data, status, headers, config) {
+				$rootScope.error = 'Servie.js - SignOut: Something bad here...';
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			});
+        }
 	} ]);
 
-    /* *********************************************************************** */
-
 	AriaServices.run([ '$rootScope', '$localStorage', function($rootScope, $localStorage) {
-	    $rootScope.removeToken = function(data) {
-				delete $localStorage.Token;
-				delete $rootScope.Token;
-				delete $rootScope.currentUser;
-				delete $localStorage.currentUser;
-		  	}
-    	}
-	]);
+	    $rootScope.removeToken = function() {
+			delete $localStorage.Token;
+			delete $rootScope.Token;
+			delete $rootScope.currentUser;
+			delete $localStorage.currentUser;
+			delete $rootScope.TokenId;
+			delete $localStorage.TokenId;
+
+		}
+    } ]);
 
 
+
+
+
+	// ---- ---------------------------------------------------------------- ---
+    // ----                                                                  ---
+    // ---- DIRECTIVES                                                       ---
+    // ----                                                                  ---
+    // ---- ---------------------------------------------------------------- ---
+
+
+
+
+
+	// ---- ---------------------------------------------------------------- ---
+    // ---- ngEnter, trig action and overrive the default action             ---
+    // ---- ---------------------------------------------------------------- ---
 
 	AriaServices.directive('ngEnter', [ function () {
 	    return function (scope, element, attrs) {
@@ -139,12 +237,19 @@ var AriaDirective = angular.module('AriaDirective', []);
 	                scope.$apply(function (){
 	                    scope.$eval(attrs.ngEnter);
 	                });
-
 	                event.preventDefault();
 	            }
 	        });
 	    };
 	} ]);
+
+
+
+
+
+	// ---- ---------------------------------------------------------------- ---
+    // ---- AriaComments: display Comments model                             ---
+    // ---- ---------------------------------------------------------------- ---
 
 	AriaServices.directive('ariaComments', function() {
 		return {
@@ -169,79 +274,3 @@ var AriaDirective = angular.module('AriaDirective', []);
 			},
 		};
 	});
-
-
-
-    /* **************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    ***************************************************************************
-
-   AriaServices.factory('Auth', ['$http', '$localStorage', 'urls', function ($http, $localStorage, urls) {
-       function urlBase64Decode(str) {
-           var output = str.replace('-', '+').replace('_', '/');
-           switch (output.length % 4) {
-               case 0:
-                   break;
-               case 2:
-                   output += '==';
-                   break;
-               case 3:
-                   output += '=';
-                   break;
-               default:
-                   throw 'Illegal base64url string!';
-           }
-           return window.atob(output);
-       }
-
-       function getClaimsFromToken() {
-           var token = $localStorage.token;
-           var user = {};
-           if (typeof token !== 'undefined') {
-               var encoded = token.split('.')[1];
-               user = JSON.parse(urlBase64Decode(encoded));
-           }
-           return user;
-       }
-
-       var tokenClaims = getClaimsFromToken();
-
-       return {
-           signup: function (data, success, error) {
-               $http.post(urls.BASE + '/auth/login', data).success(success).error(error)
-           },
-           signin: function (data, success, error) {
-               $http.post(urls.BASE + '/auth/login', data).success(success).error(error)
-           },
-           logout: function (success) {
-               tokenClaims = {};
-               delete $localStorage.token;
-               success();
-           },
-           getTokenClaims: function () { return tokenClaims; }
-       };
-   }
-   ]);
-
-
-   AriaDirective.factory('Data', ['$http', 'urls', function ($http, urls) {
-       return {
-           getRestrictedData: function (success, error) {
-               $http.get(urls.BASE + '/restricted').success(success).error(error)
-           },
-           getApiData: function (success, error) {
-               $http.get(urls.BASE_API + '/restricted').success(success).error(error)
-           }
-       };
-   }
-   ]);
-
-    ** **************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    *****************************************************************************
-    ************************************************************************** */
