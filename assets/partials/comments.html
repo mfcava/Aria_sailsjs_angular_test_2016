@@ -1,16 +1,22 @@
-<!-- Partial for Comments -->
-
-<!-- Comments show -->
-<button type="button" class="btn btn-primary btn-small pull-right" data-toggle="modal" data-target="#CommentModal">
+<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#CommentModal">
   Insert new Comment
 </button>
+<hr>
 
-<div ng-repeat="comment in post.comments" ng-if="comment.parent" class="well">
-     <p>{{comment.id}}</p><p>{{comment.text}}</p>
-     <p><i>Made by {{comment.owned.nickname}}</i> - parent of: {{comment.parent}}</p>
-     <button type="button" class="btn btn-primary btn-small pull-right" ng-click="setParentComment(comment.id)" >Reply</button>
-     <button type="button" class="btn btn-danger btn-small pull-right"  ng-click="removeComment(comment.id)">Delete</button>
-</div>
+<!-- Partial for Comments -->
+
+<aria-comments listcomments="postComments" parent-id="''" show-modal="showModal('#CommentModal',parent)" delete-comment="deleteComment(commentIndex)"></aria-comments>
+
+<!-- Partial for Comments -->
+
+
+
+
+
+
+
+
+
 
 <!-- Modal: Comment New -->
 <!-- Modal: Comment New -->
@@ -24,13 +30,16 @@
                <div class="modal-body">
                     <p>Insert your comment here ...</p>
                     <div class="input-group">
-                         <input type="hidden" id="comment_parent" name="comment_parent" ng-model="commentParent"></input>
-                         <textarea type="text" class="form-control" id="comment_text" name="comment_text" ng-model="commentText" placeholder="Insert your comment..."></textarea>
+                        <input type="hidden" id="comment_parent"      name="comment_id" ng-model="newComment.id"></input>
+                        <input type="hidden" id="comment_parent"      name="comment_parent" ng-model="newComment.parent"></input>
+                        <input type="hidden" id="comment_owner"       name="comment_owned"  ng-model="newComment.owned"></input>
+                        <input type="hidden" id="comment_post_owner"  name="comment_post"   ng-model="newComment.post_owner"></input>
+                        <textarea type="text" class="form-control" id="comment_text" name="comment_text" ng-model="newComment.text" placeholder="Insert your comment..."></textarea>
                     </div>
                </div>
                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="addNewComment(commentText,commentParent,currentUser);" >Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="addNewComment();" >Save changes</button>
                </div>
           </div> <!-- /.modal-content -->
      </div> <!-- /.modal-dialog -->

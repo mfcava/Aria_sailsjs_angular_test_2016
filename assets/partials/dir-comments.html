@@ -1,0 +1,18 @@
+<script type="text/ng-template" id="categoryTree">
+        <p>
+            {{comment.text}}<br>
+            <small><span ng-if="comment.owned.id != '' ">wrote by <a href="/user/{{comment.owned.id}}">{{comment.owned.nickname}}</a></span> - {{comment.createdAt}}</small>
+        </p>
+        <p><button ng-click="showModal({parent: comment.id})">reply</button> | <button ng-click="deleteComment({commentIndex: comment.id})">delete</button></p>
+        <ul ng-if="comment.haschild">
+             <li ng-repeat="comment in listcomments | filter: {parent: comment.haschild}" ng-include="'categoryTree'" id="comment-id-{{comment.id}}"></li>
+        </ul>
+</script>
+
+<!-- Partial for Comments -->
+<ul>
+    <li ng-repeat="comment in listcomments" ng-include="'categoryTree'" ng-if="comment.parent == parentId"></li>
+</ul>
+
+<!-- / Partial for Comments
+ -->

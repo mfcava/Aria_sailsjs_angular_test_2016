@@ -30,17 +30,20 @@ module.exports.policies = {
 		   '*': true,
 		   update: [ 'hasJsonWebToken', 'ValidJsonWebToken', 'hasUserId', 'isPostOwner'],
 		   delete: [ 'hasJsonWebToken', 'ValidJsonWebToken', 'isPostOwner']
-		   },
+	},
 	AuthController: true,
 	UserController: {
 		  '*': ['hasJsonWebToken', 'ValidJsonWebToken'],
 			'*': true,
 		  login: true,
 		  jwt: true
-		  },
+	},
 	FileController: {
 		showImage: true,
 		upload: true
+	},
+	CommentController: {
+		'*': true
 		}
 
   /***************************************************************************

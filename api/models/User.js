@@ -17,7 +17,12 @@ module.exports = {
     posts: {
            collection: 'post',
            via: 'owned'
-           }
+    },
+    comments: {
+        collection: 'Comment',
+        via: 'owned'
+    }
+
   }),
 
   beforeCreate: require('waterlock').models.user.beforeCreate,

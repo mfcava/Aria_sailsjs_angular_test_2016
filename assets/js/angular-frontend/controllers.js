@@ -22,13 +22,6 @@ AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post 
     $scope.homePosts   = Post.query({skip: 0 ,limit: 4, sort: $scope.sortBy, where: '{"homePage":{"contains":"true"}}' } );
     $scope.latestPosts = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePage": [null,"false"]}' } );
 
-    { or:
-        [
-            { "homePage" : "false"},
-            {"homePage" : null }
-        ]
-    }
-
 } ]);
 
 
@@ -142,10 +135,13 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
     // ---- ------------------------------------------------------------------- ---
     // ---- /post/:id Controller                                                ---
     // ---- ------------------------------------------------------------------- ---
-    AriaControllers.controller('PostShowCtrl', ['$scope', '$rootScope', '$routeParams', 'Post', 'Article', 'flash', function($scope, $rootScope, $routeParams, Post, Article, flash) {
+    AriaControllers.controller('PostShowCtrl', ['$scope', '$rootScope', '$routeParams', 'Post', 'Article', 'Comment', 'flash', function($scope, $rootScope, $routeParams, Post, Article, Comment, flash) {
         $scope.flash = flash;
         $scope.currentUser = $rootScope.currentUser;
         $scope.post;
+        $scope.postComments;
+        $scope.commentParent = "";
+        $scope.newComment = new Comment;
 
         // console.log('Controller.js - PostShowCtrl currentUser:'+$rootScope.currentUser);
         if ( $routeParams.TitleSlug ) {
@@ -153,15 +149,18 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
             Article.get({TitleSlug: $routeParams.TitleSlug})
             .$promise.then( function(val) {
                 $scope.SetPostAndMeta(val);
+                $scope.postComments = Comment.query({ where: '{"PostId": '+val.id+'}' } );
             });
         }
         else {
             console.log('Controller.js - PostId: '+$routeParams.PostId);
+            $scope.postComments = Comment.query({ where: '{PostId: '+$routeParams.PostId+'}' } );
             Post.get({PostId: $routeParams.PostId})
             .$promise.then( function(val) {
                 $scope.SetPostAndMeta(val);
             });
         }
+
 
         $scope.deletePost = function (PostId) {
             Post.delete({ id: PostId });
@@ -184,6 +183,45 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
             // console.log(val.owned.id);
         };
 
+        $scope.showModal = function (modalID,parent) {
+            $scope.commentParent = parent;
+            $(modalID).modal('toggle');
+        };
+
+        $scope.addNewComment = function () {
+            if ($scope.currentUser != null) {
+                $scope.newComment.id = '';
+                $scope.newComment.owned = $scope.currentUser.id;
+                $scope.newComment.parent = $scope.commentParent;
+                $scope.newComment.post_owner = $scope.post.id;
+                $scope.newComment.$save().then(function (newComment) {
+                    $scope.postComments.push(newComment);
+                    setTimeout(function(){ $scope.$apply() }, 200);
+                    });
+                }
+            //
+        };
+
+        $scope.deleteComment = function(commentIndex) {
+            var contentMap = {};
+            var i = null;
+            for (i = 0; $scope.postComments.length > i; i += 1) {
+                if ($scope.postComments[i].id == commentIndex ) {
+                    $scope.newComment.$delete({ CommentId: commentIndex }).then(function (deletedComment) {
+                        $scope.postComments.splice(i,1);
+                        setTimeout(function(){ $scope.$apply() }, 200);
+                    });
+                }
+            }
+
+            // $scope.newComment.$delete({ CommentId: commentIndex }).then(function (deletedComment) {
+            //     console.log(deletedComment);
+            //     console.log($scope.postComments.indexOf(deletedCo));
+            //     // $scope.postComments.splice(deletedComment, 1);
+            //     $scope.$apply();
+            //  });
+        };
+
     }]);
 
     // ---- ------------------------------------------------------------------- ---
@@ -199,7 +237,8 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
         }
         $scope.autocompleteTags = false;
         $scope.searchTag = '';
-        // callback for ng-click 'deletePost':
+
+        // Function for ng-click 'deletePost':
         $scope.deletePost = function () {
             $scope.post.$delete({ PostId: $scope.post.id });
         };

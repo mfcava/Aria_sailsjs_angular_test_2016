@@ -8,26 +8,33 @@ var AriaDirective = angular.module('AriaDirective', []);
           });
     }]);
 
-		AriaServices.factory('Metatag', ['$resource',
-	    	function($resource){
-	      	  return $resource('/api/metatag/:MetatagId', {}, {
-	          // query: { method:'GET', params:{PostId:''}, isArray:true }
-	          });
-	    }]);
+	AriaServices.factory('Metatag', ['$resource',
+	    function($resource){
+	    	return $resource('/api/metatag/:MetatagId', {}, {
+	        // query: { method:'GET', params:{PostId:''}, isArray:true }
+	    });
+	}]);
 
-		AriaServices.factory('Article', ['$resource',
-				function($resource){
-						return $resource('/api/article/:TitleSlug', {}, {
-						// query: { method:'GET', params:{PostId:''}, isArray:true }
-						});
-		}]);
+	AriaServices.factory('Article', ['$resource',
+		function($resource){
+			return $resource('/api/article/:TitleSlug', {}, {
+			// query: { method:'GET', params:{PostId:''}, isArray:true }
+		});
+	}]);
 
 	AriaServices.factory('User', ['$resource',
-  		function($resource){
+		function($resource){
     		return $resource('/api/user/:UserId', {}, {
-      		// query: { method:'GET', params:{UserId:'user'}, isArray:true }
+    		// query: { method:'GET', params:{UserId:'user'}, isArray:true }
     	});
-  	}]);
+	}]);
+
+	AriaServices.factory('Comment', ['$resource',
+		function($resource){
+			return $resource('/api/comment/:CommentId', {}, {
+			// query: { method:'GET', params:{UserId:'user'}, isArray:true }
+		});
+	}]);
 
 
 
@@ -138,6 +145,30 @@ var AriaDirective = angular.module('AriaDirective', []);
 	        });
 	    };
 	} ]);
+
+	AriaServices.directive('ariaComments', function() {
+		return {
+    		restrict: 'AE',
+			bindToController: true,
+			scope: {
+				listcomments: "=",
+				parentId: "=",
+				showModal: "&",
+				deleteComment: "&"
+			},
+    		templateUrl: '/partials/dir-comments.html',
+			link : function(scope, element, attrs) {
+				angular.forEach(scope.listcomments, function(value, key) {
+					// console.log(scope.listcomments[key]);
+					angular.forEach(scope.listcomments, function(v, k) {
+						if ((value.id == v.parent) && (value.id != v.id)) {
+						   scope.listcomments[key].haschild = value.id;
+						}
+					});
+				});
+			},
+		};
+	});
 
 
 

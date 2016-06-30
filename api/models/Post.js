@@ -17,20 +17,24 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
-        content:  'string',
-        coverImage: 'string',
+        highlight: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+        content:     'string',
+        coverImage:  'string',
         layoutClass: 'string',
         owned: {
-            model: 'user'
-        },
-        metatags: {
-            model: 'metatag',
-            unique: true
+            model: 'User'
         },
         tags: {
             collection: 'ContentsTag',
             via: 'posts',
             dominant: true // ---
+        },
+        comments: {
+            collection: 'Comment',
+            via: 'post_owner'
         }
     },
 
@@ -88,6 +92,6 @@ module.exports = {
                 // values.title_slug = values.title
                 // console.log(values.title_slug);
                 cb();
-            },
+        },
 
-        };
+    };
