@@ -194,32 +194,26 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
                 $scope.newComment.owned = $scope.currentUser.id;
                 $scope.newComment.parent = $scope.commentParent;
                 $scope.newComment.post_owner = $scope.post.id;
-                $scope.newComment.$save().then(function (newComment) {
+                new Comment($scope.newComment).$save().then(function (newComment) {
+                    console.log($scope.postComments);
+                    console.log('merge');
                     $scope.postComments.push(newComment);
-                    setTimeout(function(){ $scope.$apply() }, 200);
+                    // setTimeout(function(){ $scope.$apply() }, 200);
+                    console.log($scope.postComments);
+                    $scope.newComment.text = '';
                     });
                 }
             //
         };
 
         $scope.deleteComment = function(commentIndex) {
-            var contentMap = {};
-            var i = null;
-            for (i = 0; $scope.postComments.length > i; i += 1) {
-                if ($scope.postComments[i].id == commentIndex ) {
-                    $scope.newComment.$delete({ CommentId: commentIndex }).then(function (deletedComment) {
+            c = new Comment();
+            c.$delete({ CommentId: commentIndex }).then(function (deletedComment) {
+                for (i = 0; $scope.postComments.length > i; i += 1) {
+                    if ($scope.postComments[i].id == deletedComment.id )
                         $scope.postComments.splice(i,1);
-                        setTimeout(function(){ $scope.$apply() }, 200);
-                    });
                 }
-            }
-
-            // $scope.newComment.$delete({ CommentId: commentIndex }).then(function (deletedComment) {
-            //     console.log(deletedComment);
-            //     console.log($scope.postComments.indexOf(deletedCo));
-            //     // $scope.postComments.splice(deletedComment, 1);
-            //     $scope.$apply();
-            //  });
+            });
         };
 
     }]);
