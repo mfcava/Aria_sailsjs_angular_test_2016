@@ -23,28 +23,28 @@ module.exports.waterlock = {
   // of the local authentication method with password reset tokens disabled.
   authMethod: [
     {
-      name:'waterlock-local-auth',
-      passwordReset:{
+    name:'waterlock-local-auth',
+    passwordReset:{
         tokens: false,
         mail: {
-          protocol: 'SMTP',
-          options:{
-            service: 'Gmail',
-            auth: {
-              user: 'risingfenix@gmail.com',
-              pass: 'P1c14nP4ss!'
-            }
-          },
-          from: 'no-reply@domain.com',
-          subject: 'Your password reset!',
-          forwardUrl: 'http://swift-baby-178249.nitrousapp.com:3000'
+            protocol: 'SMTP',
+            options:{
+                service: 'Gmail',
+                auth: {
+                    user: 'risingfenix@gmail.com',
+                    pass: 'P1c14nP4ss!'
+                }
+            },
+            from: 'no-reply@domain.com',
+            subject: 'Your password reset!',
+            forwardUrl: 'http://swift-baby-178249.nitrousapp.com:3000'
         },
         template:{
-          file: '../views/email.jade',
-          vars:{}
+            file: '../views/email.jade',
+            vars:{}
         }
-      },
-      createOnNotFound: true
+    },
+    createOnNotFound: true
     }
   ],
 
