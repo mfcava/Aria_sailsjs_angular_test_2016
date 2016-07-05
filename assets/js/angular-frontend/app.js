@@ -11,7 +11,8 @@ var AriaApp = angular.module('AriaApp', [
 	'AriaServices',
 	'AriaDirective',
 	'angulartics',
-	'angulartics.google.analytics'
+	'angulartics.google.analytics',
+	'infinite-scroll'
 ]);
 
 
@@ -72,7 +73,7 @@ AriaApp.run(['$rootScope','$localStorage','$location','$analytics', function($ro
 	};
 
 	$rootScope.metadata = $rootScope.metadata_def
-	
+
 	$rootScope.$on('newPageLoaded', function(event, metadata) {
 		$rootScope.metadata = metadata;
 		setTimeout(function(){ $analytics.pageTrack($location.path() ) }, 1000);

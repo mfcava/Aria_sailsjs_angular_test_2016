@@ -90,13 +90,14 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
     // ---- ------------------------------------------------------------------- ---
     // ---- /post/ Controller                                                   ---
     // ---- ------------------------------------------------------------------- ---
-    AriaControllers.controller('PostsCtrl', ['$scope', 'Post', '$http', function($scope, Post, $http) {
+    AriaControllers.controller('PostsCtrl', ['$scope', 'Post', '$http', function( $scope, Post, $http ) {
         $scope.postPreviewLimit = 350;
         $scope.currentPage = 0;
         $scope.elementInPage = 3;
         $scope.totalPost = 0;
         $scope.sortBy = 'createdAt DESC';
         $scope.pageNumber = 0;
+        $scope.busy =  false;
 
         $scope.latestPost = Post.query({
             skip: 0 ,
@@ -129,8 +130,10 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
         };
 
         $scope.setPage = function (pageNumber) {
-	            if (pageNumber !== undefined) {
-		            if (pageNumber == 'next') {
+            if ($scope.currentPage < $scope.pageNumber) {
+                console.log($scope.currentPage+':'+$scope.pageNumber);
+                if (pageNumber !== undefined) {
+                    if (pageNumber == 'next') {
                         $scope.currentPage = $scope.currentPage+1; }
                     else if ( pageNumber == 'prev' && $scope.currentPage > 0)  {
                         $scope.currentPage = $scope.currentPage-1; }
@@ -143,22 +146,33 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
                 else {
 	                $scope.currentPage = $scope.currentPage;
 	            }
-	            $scope.posts = Post.query({
+                $scope.busy = true;
+                Post.query({
                     skip: ($scope.currentPage*$scope.elementInPage)+1,
                     limit: $scope.elementInPage,
                     sort: $scope.sortBy,
-                    where: '{"homePageCover": {"!": ["true","null"]}}' }
-                );
+                    where: '{"homePageCover": {"!": ["true","null"]}}' } )
+                .$promise.then( function(p) {
+                    if (p.length > 0) {
+                        for (var i = 0; i < p.length; i++) {
+                            $scope.posts.push(p[i]);
+                        }
+                    }
+                    $scope.busy = false;
+                } );
+            }
         };
 
         $scope.getNumberOfPage = function(pageNumber){
             r = new Array(pageNumber);
-            console.log('---');
-            console.log(r);
             return r;
         };
 
         $scope.MailSubscribe = function () {
+        };
+
+        $scope.myPagingFunction = function() {
+            console.log('Paging!');
         };
 
 }]);
@@ -166,7 +180,7 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
     // ---- ------------------------------------------------------------------- ---
     // ---- /post/:id Controller                                                ---
     // ---- ------------------------------------------------------------------- ---
-    AriaControllers.controller('PostShowCtrl', ['$scope', '$rootScope', '$routeParams', 'Post', 'Article', 'Comment', 'flash', function($scope, $rootScope, $routeParams, Post, Article, Comment, flash) {
+    AriaControllers.controller('PostShowCtrl', ['$scope', '$rootScope', '$routeParams', 'Post', 'Article', 'Comment', 'flash', function($scope, $rootScope, $routeParams, Post, Article, Comment, flash ) {
         $scope.flash = flash;
         $scope.currentUser = $rootScope.currentUser;
         $scope.post;
@@ -236,11 +250,8 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
                 $scope.newComment.parent = $scope.commentParent;
                 $scope.newComment.post_owner = $scope.post.id;
                 new Comment($scope.newComment).$save().then(function (newComment) {
-                    console.log($scope.postComments);
-                    console.log('merge');
                     $scope.postComments.push(newComment);
                     // setTimeout(function(){ $scope.$apply() }, 200);
-                    console.log($scope.postComments);
                     $scope.newComment.text = '';
                     });
                 }
