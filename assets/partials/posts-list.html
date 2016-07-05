@@ -48,14 +48,14 @@
 						<nav>
 							<ul class="pagination">
 								<li ng-class="{'disabled': currentPage == 0 }" ng-click="setPage('prev')">
-									<a href="" aria-label="Previous" ng-click="prevPostPage()" >
+									<a href="" aria-label="Previous" ng-click="setPage('prev')" >
 										<span aria-hidden="true">&laquo;</span>
 									</a>
 								</li>
 								<!-- -->
 								<!-- -->
-								<li ng-repeat="p in getPostsNumber(pageNumber) track by $index" ng-class="{'active': currentPage == $index }" >
-									<a href="" ng-click="setPage($index)" >{{$index}}</a>
+								<li ng-repeat="i in getNumberOfPage(pageNumber) track by $index" ng-class="{'active': currentPage == $index+1 }" >
+									<a href="" ng-click="setPage($index)" >{{$index+1}}</a>
 								</li>
 								<!-- -->
 								<!-- -->

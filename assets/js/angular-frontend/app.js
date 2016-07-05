@@ -70,8 +70,9 @@ AriaApp.run(['$rootScope','$localStorage','$location','$analytics', function($ro
 		'keywords': 'Marketing, Millenials, Brands',
 		'canonical': '/'
 	};
-	$rootScope.metadata = $rootScope.metadata_def
 
+	$rootScope.metadata = $rootScope.metadata_def
+	
 	$rootScope.$on('newPageLoaded', function(event, metadata) {
 		$rootScope.metadata = metadata;
 		setTimeout(function(){ $analytics.pageTrack($location.path() ) }, 1000);

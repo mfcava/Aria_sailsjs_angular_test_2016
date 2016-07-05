@@ -17,6 +17,10 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
+        homePageCover: {
+            type: 'boolean',
+            defaultsTo: false
+        },
         highlight: {
             type: 'boolean',
             defaultsTo: false

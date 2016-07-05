@@ -92,8 +92,17 @@
 									<input type="hidden" name="homePage" value="false">
 							    	<input ng-switch-when="true" type="checkbox"  name="homePage" ng-model="post.homePage" value="true" checked >
 									<input ng-switch-default     type="checkbox"  name="homePage" ng-model="post.homePage" value="true" >
-									Show Post in Home Page
+									Show in Home Page
 							    </label>
+							</div>
+
+							<div class="checkbox" ng-switch="post.homePageCover">
+								<label>
+									<input type="hidden" name="homePage" value="false">
+									<input ng-switch-when="true" type="checkbox"  name="homePage" ng-model="post.homePageCover" value="true" checked >
+									<input ng-switch-default     type="checkbox"  name="homePage" ng-model="post.homePageCover" value="true" >
+									Set this post as Home Page Cover
+								</label>
 							</div>
 
 							<!-- content -->

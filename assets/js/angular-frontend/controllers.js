@@ -19,7 +19,8 @@ AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post 
 
     $scope.postPreviewLimit = 350;
     $scope.sortBy = 'createdAt DESC';
-    $scope.homePosts   = Post.query({skip: 0 ,limit: 4, sort: $scope.sortBy, where: '{"homePage":{"contains":"true"}}' } );
+    $scope.coverPost   = Post.query({skip: 0 ,limit: 1, sort: $scope.sortBy, where: '{"homePageCover":"true"}' } );
+    $scope.homePosts   = Post.query({skip: 0 ,limit: 4, sort: $scope.sortBy, where: '{"homePageCover":{"!":["true","null"]},"homePage":"true"}' } );
     $scope.latestPosts = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePage": [null,"false"]}' } );
 
 } ]);
@@ -89,14 +90,36 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
     // ---- ------------------------------------------------------------------- ---
     // ---- /post/ Controller                                                   ---
     // ---- ------------------------------------------------------------------- ---
-    AriaControllers.controller('PostsCtrl', ['$scope', 'Post', function($scope, Post) {
+    AriaControllers.controller('PostsCtrl', ['$scope', 'Post', '$http', function($scope, Post, $http) {
         $scope.postPreviewLimit = 350;
         $scope.currentPage = 0;
         $scope.elementInPage = 3;
+        $scope.totalPost = 0;
         $scope.sortBy = 'createdAt DESC';
-        $scope.pageNumber = Math.ceil((Post.query.length) / $scope.elementInPage);
-        $scope.latestPost = Post.query({skip: 0 ,limit: 1, sort: $scope.sortBy } );
-        $scope.posts = Post.query({skip: $scope.currentPage*$scope.elementInPage+1 ,limit: $scope.elementInPage, sort: $scope.sortBy } );
+        $scope.pageNumber = 0;
+
+        $scope.latestPost = Post.query({
+            skip: 0 ,
+            limit: 1,
+            sort: $scope.sortBy,
+            where: '{"homePageCover": {"!": ["true","null"]}}'  } );
+        $scope.posts = Post.query({
+            skip: ($scope.currentPage*$scope.elementInPage)+1,
+            limit: $scope.elementInPage,
+            sort: $scope.sortBy,
+            where: '{"homePageCover": {"!": ["true","null"]}}' } );
+
+        $http({
+            method: 'GET',
+            url: '/api/post/count/?where={"homePageCover": {"!": ["true","null"]}}'
+        })
+        .then(function successCallback(response) {
+            $scope.totalPost = response.data.count-1;
+            $scope.pageNumber = Math.ceil( $scope.totalPost / $scope.elementInPage);
+        },
+        function errorCallback(response) {
+            console.log('Error on: "/api/post/count/""');
+        });
 
         $scope.changeImageName = function (message) {
 		        var f = jQuery.parseJSON(message.substr(message.indexOf("[")+1,message.lastIndexOf("]")-1));
@@ -107,24 +130,32 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
 
         $scope.setPage = function (pageNumber) {
 	            if (pageNumber !== undefined) {
-		                if (pageNumber == 'next') {
-                            $scope.currentPage = $scope.currentPage+1; }
-                        else if ( pageNumber == 'prev' && $scope.currentPage > 0)  {
-                            $scope.currentPage = $scope.currentPage-1; }
-                        else if ( pageNumber == 'prev' && $scope.currentPage == 0)  {
-                            $scope.currentPage = 0; }
-                        else {
-		                    $scope.currentPage = pageNumber;
-		                }
+		            if (pageNumber == 'next') {
+                        $scope.currentPage = $scope.currentPage+1; }
+                    else if ( pageNumber == 'prev' && $scope.currentPage > 0)  {
+                        $scope.currentPage = $scope.currentPage-1; }
+                    else if ( pageNumber == 'prev' && $scope.currentPage == 0)  {
+                        $scope.currentPage = 0; }
+                    else {
+		                $scope.currentPage = pageNumber;
+		            }
 	            }
                 else {
-	                   $scope.currentPage = $scope.currentPage + 1;
+	                $scope.currentPage = $scope.currentPage;
 	            }
-	            $scope.posts = Post.query({skip: $scope.currentPage*$scope.elementInPage+1,limit: $scope.elementInPage, sort: $scope.sortBy } );
+	            $scope.posts = Post.query({
+                    skip: ($scope.currentPage*$scope.elementInPage)+1,
+                    limit: $scope.elementInPage,
+                    sort: $scope.sortBy,
+                    where: '{"homePageCover": {"!": ["true","null"]}}' }
+                );
         };
 
-        $scope.getPostsNumber = function(pageNumber){
-            return new Array(pageNumber);
+        $scope.getNumberOfPage = function(pageNumber){
+            r = new Array(pageNumber);
+            console.log('---');
+            console.log(r);
+            return r;
         };
 
         $scope.MailSubscribe = function () {
@@ -147,18 +178,24 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
         if ( $routeParams.TitleSlug ) {
             console.log('Controller.js - TitleSlug: '+$routeParams.TitleSlug);
             Article.get({TitleSlug: $routeParams.TitleSlug})
-            .$promise.then( function(val) {
-                $scope.SetPostAndMeta(val);
-                $scope.postComments = Comment.query({ where: '{"PostId": '+val.id+'}' } );
-            });
+                .$promise.then( function(val) {
+                    $scope.SetPostAndMeta(val);
+                    Comment.query({ where: '{"post_owner": "'+val.id+'"}' } )
+                        .$promise.then( function(p) {
+                            p = $scope.postComments;
+                        });
+                });
         }
         else {
             console.log('Controller.js - PostId: '+$routeParams.PostId);
-            $scope.postComments = Comment.query({ where: '{PostId: '+$routeParams.PostId+'}' } );
             Post.get({PostId: $routeParams.PostId})
-            .$promise.then( function(val) {
-                $scope.SetPostAndMeta(val);
-            });
+                .$promise.then( function(val) {
+                    Comment.query({ where:'{"post_owner": "'+$routeParams.PostId+'"}' })
+                        .$promise.then( function(p) {
+                            $scope.SetPostAndMeta(val);
+                            $scope.postComments = p;
+                        });
+                });
         }
 
 
@@ -167,19 +204,23 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
             $scope.post = Post.query();
         };
 
-        $scope.SetPostAndMeta = function (Post) {
-            $scope.post = Post;
+        $scope.SetPostAndMeta = function (req_post) {
+            $scope.post = req_post;
             var tags = '';
             // Set meta-data
-            angular.forEach($scope.post.tags, function(value) {
-                tags = tags + value.name + ",";
-            });
-            $scope.$emit('newPageLoaded', {
-                'title': $scope.post.metatags.title,
-                'description': $scope.post.metatags.description,
-                'keywords': tags,
-                'canonical': '#!/article/'+$scope.post.title_slug
-            });
+            if (req_post.tags.length > 0) {
+                angular.forEach(req_post.tags, function(value) {
+                    tags = tags + value.name + ",";
+                });
+            }
+            if (req_post.metatags != null) {
+                $scope.$emit('newPageLoaded', {
+                    'title': req_post.metatags.title,
+                    'description': req_post.metatags.description,
+                    'keywords': tags,
+                    'canonical': '#!/article/'+req_post.title_slug
+                });
+            }
             // console.log(val.owned.id);
         };
 

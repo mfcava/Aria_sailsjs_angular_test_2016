@@ -1,16 +1,15 @@
 <section id="home_page" class="home_page">
 	<!-- row -->
-	<div class="row home_banner">
+	<div class="row home_banner" ng-repeat="post in coverPost" ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}">
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="col-lg-5 ribbon clearfix">
 				<div class="home_intro">
-					<h2>Millenias Marketing</h2>
-					<h3>To invent the future we're rewriting the rules</h3>
-					<p>Per poi sai sta mite uomo anch ieri daro. Incessante sollevando interrotta qua guardatelo sai tuo del. Chi chi chi ciascuno profonde divenuto spiaggia dovevamo. Umilta trasse voglio di ah corano ultima la ci scarno. Mondo volte della abbia el erano su stata ho. Ipogeo ne triste mutata no oh levato di. Mia ritardo pel dio dai riavuto nessuno dovette vissuto tornato.</p>
+					<h2>{{post.title}}</h2>
+					<p>{{post.content | limitTo:postPreviewLimit}}</p>
 					<center>
-						<h4>We don't want boring customer</h4>
-						<button type="button" class="btn btn-primary home-cta">Discover more</button>
-						<!-- <p><small>You are in good company (we are: {{users.length}})</small></p> -->
+						<a href="/article/{{post.title_slug}}">
+							<button type="button" class="btn btn-primary home-cta">Discover more</button>
+						</a>
 					</center>
 				</div>
 			</div>

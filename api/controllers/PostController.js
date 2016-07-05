@@ -73,6 +73,13 @@ module.exports = {
                 else
                     res.json(post);
             });
+    },
+
+    count: function  (req, res) {
+        //  ---
+        //	Return a count for all posts
+        //  ---
+        BaseController.count(req,res);
     }
 
 
