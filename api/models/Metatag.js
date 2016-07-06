@@ -14,16 +14,11 @@ module.exports = {
         },
         description: 'string',
         owned: {
-            model: 'Post'
+            model: 'Post',
+            unique: true
         }
-    },
+    }
 
     // Lifecycle Callbacks
-    beforeCreate: function (values, cb) {
-        //  Lower Case tag Name
-        values.name = values.name.toLowerCase();
-        // calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
-        cb();
-    }
 
 };

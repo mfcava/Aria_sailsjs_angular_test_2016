@@ -14,9 +14,13 @@
  * or any other Grunt tasks you like.)
  */
 
+@import 'above_the_fold.scss';
+
 @import 'bootstrap.scss';
-@import 'styles.scss';
 @import 'bootstrap_mod.scss';
+@import 'styles.scss';
+
+
 
 // For example:
 //

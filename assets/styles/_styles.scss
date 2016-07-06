@@ -1,132 +1,59 @@
-/*
-  Generic Styles -  used in more that 1 page
----------------------------------------------------------------------------- */
+/*  ----------------------------------------------------------------------------
 
-@font-face { font-family: Brandon_Bold;   src: url(/fonts/brandon/Brandon_bld.otf)};
-@font-face { font-family: Brandon_Light;  src: url(/fonts/brandon/Brandon_light.otf)};
-@font-face { font-family: Brandon_Medium; src: url(/fonts/brandon/Brandon_med.otf)};
-@font-face { font-family: Brandon_Bulk;   src: url(/fonts/brandon/Brandon_blk.otf)};
+    Under the fold styles.
 
-$color_backgroud: $body-bg;
-$color_backgroud_contrast: darken($color_backgroud,10%);
-$color_accent: $brand-primary;
-$color_disabled: #777;
+    ------------------------------------------------------------------------- */
 
-$color_home_main_post_background: $color_backgroud ;
-$color_home_main_post_accent: $color_accent;
+    .post-tag      { margin-right: 0.5em; margin-bottom: 1em;}
+    .sign-up       { background: $color_backgroud_contrast; padding-bottom: 2rem;}
+    .flash-message { margin-top: 1.5em;}
 
-$color_post_detail_background: $body-bg;
-$color_post_detail_accent: $color_accent;
-
-$font-color: #000;
-$font-color-light: $body-bg;
-
-.post-tag      { margin-right: 0.5em; margin-bottom: 1em;}
-.sign-up       { background: $color_backgroud_contrast; padding-bottom: 2rem;}
-.flash-message { margin-top: 1.5em;}
-
-h1 { font-family: 'Brandon_Bold', 'sans', sans-serif};
-h2, h3, h4, h5, h6, p { font-family: 'Brandon_Medium', 'sans', sans-serif; line-height: 1.5em;};
-p {
-  /* font-family: 'Brandon_light', 'sans'; */
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  font-size: 1.5rem;
-  line-height: 1.7em;
-  margin-bottom: 2.0em;
-  }
-
-button {font-family: 'Brandon_light', 'sans';}
-
-.navbar-default {
-  background-color: rgba(0, 0, 0, 0.4);
-      border-color: rgba(0, 0, 0, 0.5);
-      }
-
-.text-logo {
-           font-size: 1.6rem;
-           letter-spacing: 0.15em;
-           font-family: 'Brandon_Light','sans';
-           .capital { font-family: 'Brandon_Medium',sans; font-size: 1.1em;}
-           }
-.home-logo { background-color: rgba(0, 0, 0, 0.5); min-height: 75px; width: 255px; margin-right: 1px; padding-left:1px; float:left;}
-
-.footer {
+    .footer {
         bottom: 0; width: 100%;  height: 60px; background-color: $color_backgroud;
         h1 { color:  #FFF;
-           .text-logo { font-size: 1.7rem;}
-           }
+            .text-logo { font-size: 1.7rem;}
+        }
         h2 { font-size:1.5rem }
         ul {
-           li {
-              color:  #FFF;
-              height: 1.75em;
-              }
-           }
-        }
-
-
-
-
-    /*
-    --- ------------------------------------------------------------------ ----
-    --- Css Common Styles                                                   ---
-    --- to @extend                                                           ---
-    --- ------------------------------------------------------------------- ---
-                                                                           */
-    @mixin ribbon {
-        min-height: 80vh; background-color: rgba(0,0,0,0.25);
-        clear:right;
-        border-radius: 0 0 0.5rem 0.5rem;
-        margin-bottom: 20vh;
-        h2 {
-            color: $color_backgroud;
-            font-size: 4rem;
-            padding-bottom: 0.6em;
-            border-bottom: 1px solid $color_backgroud;
-            a { margin-bottom: 1em; color: darken( $color_backgroud, 10% );
-                :hover { text-decoration: none; }
-            }
-            small {
-                font-size: 0.6em; clear: right; display: block; color: #FFF;
-                margin-top: 0em;
-                margin-bottom: 1.2em;
-                a {
-                    color: $color_accent;
-                    :hover { text-decoration: none; }
-                }
+            li {
+                color:  #FFF;
+                height: 1.75em;
             }
         }
-        h3 {
-          color: darken($color_backgroud,10%);
-          font-size:2.5rem;
-          letter-spacing: 0.1em;
-          margin-bottom: 1.2em;
-          }
-        h4 {
-          color: darken($color_backgroud,20%);
-          font-size:1.8rem;
-          }
-        p {
-          color: darken($color_backgroud,20%);
-          }
-        center {margin-bottom:2em;}
-        button.home-cta {
-          background-color: rgba($color_accent, 0.9);
-          box-shadow: 0 1px 6px rgba($color_backgroud,0.05), 0 1px 6px rgba($color_backgroud,0.08);
-          &:hover {
-            background-color: rgba($color_accent, 0.7);
-            border: 1px solid lighten($color_accent, 0.9);
-            box-shadow: 0 3px 8px rgba(#FFF,0.06), 0 3px 8px rgba(#FFF,0.09);
-          }
+    }
+
+/*  ----------------------------------------------------------------------------
+
+    Mixin.
+
+    ------------------------------------------------------------------------- */
+    @mixin white-fade {
+        .white-fade {
+            background-color: rgba($color_backgroud, 0.7);
+            p  { color: darken($font-color-light, 60%) }
+            h2 {
+                small {
+                    color: darken($font-color-light, 60%); }
+            }
         }
-        .home_intro {
-          padding-left:5rem;
-          padding-right:1rem;
-          text-align:right;
-          position: relative;
-          display: table-cell;
-          vertical-align: middle;
+    }
+
+    @mixin black-fade {
+        .black-fade {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: $font-color-light;
+            a  { color: darken($font-color-light, 5%);}
+            p  { color: darken($font-color-light, 30%);}
+            h2 {
+                small {
+                    color: darken($font-color-light, 30%); }
+            }
+        }
+    }
+
+    @mixin no-fade {
+        .no-fade {
+            background-color: transparent;
         }
     }
 
@@ -149,18 +76,10 @@ button {font-family: 'Brandon_light', 'sans';}
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .white-fade { background-color: rgba($color_backgroud, 0.7); }
-        .black-fade { background-color: rgba(0, 0, 0, 0.7);
-            color: $font-color-light;
-            a  { color: darken($font-color-light, 30%);}
-            p  { color: darken($font-color-light, 20%);}
-            h2 {
-                small {
-                    color: darken($font-color-light, 50%); }
-            }
-        }
         .section-container { min-height: 33vh; margin-top: 1.5em; margin-bottom:1.5em}
         .first {
+            display: table;
+            min-height: 50vh;
             background-size: cover;
             background-repeat: no-repeat;
             margin: 0px;
@@ -172,178 +91,46 @@ button {font-family: 'Brandon_light', 'sans';}
             p {
                 color: lighten($font-color, 40%);
                 text-align: justify;
-                // -webkit-column-count: 2; /* Chrome, Safari, Opera */
-                // -moz-column-count: 2; /* Firefox */
-                // column-count: 2;
-                // -webkit-column-gap: 2em; /* Chrome, Safari, Opera */
-                // -moz-column-gap: 2em; /* Firefox */
-                // column-gap: 2em;
             }
+            @include white-fade;
+            @include black-fade;
+            @include no-fade;
         }
     }
 
-    .btn-primary {
-        width: 10em;
-        border-radius: 1em;
-        transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-        box-shadow: 0 2px 6px rgba(0,0,0,0.16), 0 2px 6px rgba(0,0,0,0.23);
-        &:hover {
-            border: 1px solid lighten($color_accent, 0.7);
-            //box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-            //outline-color: rgba(255, 255, 255, 0);
-            //outline-offset: 15px;
-            // text-shadow: 1px 1px 2px #427388;
-            background-color: rgba($color_accent, 0.8);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 4px 8px rgba(0,0,0,0.22);
-        }
-        a {color: $color_backgroud_contrast}
-    }
 
 
+/*  ----------------------------------------------------------------------------
 
+    Row under the fold for home and post page.
 
-
-
-    /*
-    --- ------------------------------------------------------------------ ----
-    --- Css specific pages                                                  ---
-    --- Home page                                                           ---
-    --- ------------------------------------------------------------------- ---
-                                                                             */
-    .home_page {
-        .row { margin: 0;}
-        .home_banner {
-            padding: 0; background-image: url('/images/cover-home.jpg');
-            min-height: 100vh;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-color: lighten(#000000,40%);
-            margin: 0;
-            position:relative;
-            overflow: hidden;
-            .ribbon {
-                @include ribbon;
-            }
-            .latest {
-                margin-top: 1em;
-                bottom:0;
-                position: absolute;
-                .latest-wrap {
-                    // background-color: rgba(#000, 0.2);
-                    position: relative;
-                    height: 75px;
-                    padding-left: 0;
-                }
-                .latest-content {
-                    text-align: right;
-                    position:absolute;
-                    bottom:0;
-                    transition: all 450ms cubic-bezier(0.19, 1, 0.22, 1);
-                    p  {
-                        color:$font-color-light; font-size: 1.8rem; font-family: 'Brandon_light','sans';
-                        border-bottom:3px solid rgba($color_accent,0.0);
-                        margin-bottom:1px;
-                        small { font-size: 0.8em; display: block; clear:right; line-height: 0.9em;}
-                    }
-                    &:hover {
-                        border-bottom:3px solid rgba($color_accent,0.5);
-                        padding-bottom:0.5rem;
-                        margin-bottom:2px;
-
-                    }
-                }
-            }
-            .home_banner_cut {
-                position: absolute;
-                transform: rotate(15deg);
-                transform-origin: 0% 50%;
-                .extend {
-                    height:100vh;
-                    width: 50vw;
-                    background-color: rgba(0,0,0,0.5);
-                    transform: scale(1.30,1.40);
-                    transform-origin: 100% 100%;
-                    border-right: 6px solid rgba($color_accent,0.3);
-                }
-            }
-            .main-cta {
-                height: 100%;
-                vertical-align: middle;
-                h2 {
-                    color: $color_backgroud;
-                    font-size: 4rem;
-                    padding-top:3em;
-                    a { margin-bottom: 1em; color: darken( $color_backgroud, 10% );
-                        :hover { text-decoration: none; }
-                    }
-                    small {
-                        font-size: 0.6em; clear: right; display: block; color: #FFF;
-                        margin-top: 0em;
-                        margin-bottom: 1.2em;
-                        a {
-                            color: $color_accent;
-                            :hover { text-decoration: none; }
-                        }
-                    }
-                }
-                h3 {
-                  color: darken($color_backgroud,10%);
-                  font-size:2.5rem;
-                  letter-spacing: 0.1em;
-                  margin-bottom: 1.2em;
-                  }
-                h4 {
-                  color: darken($color_backgroud,20%);
-                  font-size:1.8rem;
-                  }
-                p {
-                  color: darken($color_backgroud,20%);
-                  }
-                center {margin-bottom:2em;}
-                button.home-cta {
-                  background-color: rgba($color_accent, 0.9);
-                  box-shadow: 0 1px 6px rgba($color_backgroud,0.05), 0 1px 6px rgba($color_backgroud,0.08);
-                  &:hover {
-                    background-color: rgba($color_accent, 0.7);
-                    border: 1px solid lighten($color_accent, 0.9);
-                    box-shadow: 0 3px 8px rgba(#FFF,0.06), 0 3px 8px rgba(#FFF,0.09);
-                  }
-                }
-                .home_intro {
-                  padding-left:5rem;
-                  padding-right:1rem;
-                  text-align:center;
-                  position: relative;
-                  display: table-cell;
-                  vertical-align: middle;
-                }
-            }
-    }
+    ------------------------------------------------------------------------- */
 
     .section {
         @include section-wide;
+        .row {
+            display: table-cell;
+            height:  inherit;
+            @include white-fade;
+            @include black-fade;
+            @include no-fade;
+        }
+        .second {
+            display: table;
+            min-height: 50vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0px;
+        }
         .second-2-1 {
             .row {
-                background: linear-gradient(to right, rgba(0,0,0,0.25) 0%,
+                background: linear-gradient(to right,
+                    rgba(0,0,0,0.25) 0%,
                     rgba(0,0,0,0.25) 63%,
                     rgba(0,0,0,0.69) 63%,
                     rgba(0,0,0,0.69) 100%);
-                .black-fade {
-                    background-color: transparent;
-                }
+                display: table-cell;
             }
-        }
-        .second {
-            background-image: url('/images/home-section-2.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: 0px;
-        }
-        .third {
-            /* background-image: url('/images/home-section-1.png'); */
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: 0px;
         }
     }
 
@@ -356,79 +143,51 @@ button {font-family: 'Brandon_light', 'sans';}
         }
     }
 
-  }
 
+/*  ----------------------------------------------------------------------------
 
+    Home page styles
 
+    ------------------------------------------------------------------------- */
 
-
-
-
-
-
-
-
-/* Posts list - main page
----------------------------------------------------------------------------- */
-#contents_list   { padding:0;}
-.container-fluid { margin:0; padding: 0}
-
-.home-main-post	{
-    .row { margin: 0;}
-    margin: 0;
-    min-height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    .ribbon { @include ribbon; }
-}
-
-.home-other-post {
-    .row { margin: 0;}
-    .section {
-      @include section-wide;
-      .right {
-        article {
-            float:right;
-            margin-right: 8.33333%
+    .home-other-post {
+        .row { margin: 0;}
+        .section {
+            @include section-wide;
+            .right {
+                article {
+                    float:right;
+                    margin-right: 8.33333%
+                }
+            }
+            .left {
+                article {
+                    
+                }
+            }
         }
-      }
     }
-}
 
 
+/*  ----------------------------------------------------------------------------
 
+    Posts page
 
+    ------------------------------------------------------------------------- */
 
-
-
-
-
-
-
-
-
-
-/* Posts details -
----------------------------------------------------------------------------- */
-.post-detail {
-    position: relative; background-color: $color_post_detail_background; overflow: hidden;
-    h1 { margin-top: 25%;}
-    .coverpad { padding-left:0px; }
-    .cover {
-        height: 300px; overflow: hidden; border-top: 4px solid $color_post_detail_accent; margin-left:0px;
-        background-position: 50% top; background-repeat: no-repeat;
-        height: 100vh; background-size: cover;
+    .post-detail {
+        position: relative; background-color: $color_post_detail_background; overflow: hidden;
+        h1 { margin-top: 25%;}
+        .coverpad { padding-left:0px; }
+        .cover {
+            height: 300px; overflow: hidden; border-top: 4px solid $color_post_detail_accent; margin-left:0px;
+            background-position: 50% top; background-repeat: no-repeat;
+            height: 100vh; background-size: cover;
+        }
+        .btn-group { margin-top: 1.5em; margin-bottom:1.5em;}
     }
-    .btn-group { margin-top: 1.5em; margin-bottom:1.5em;}
-}
 
-
-
-
-
-
-
-
-/* Posts edit - main page
----------------------------------------------------------------------------- */
-.post-detail.edit .form-group.body textarea { height: 30em;}
+/*  ----------------------------------------------------------------------------
+    Posts page - EDIT
+    ------------------------------------------------------------------------- */
+    .post-detail.edit .form-group.body textarea { height: 30em;}

@@ -42,6 +42,9 @@ module.exports.policies = {
 		showImage: true,
 		upload: true
 	},
+	HomeController: {
+		show: true
+	},
 	CommentController: {
 		'*': true
 		}

@@ -21,6 +21,8 @@ module.exports = function(grunt) {
         'sass:dev',
         // Add for HTML minify
         'htmlmin:dev',
+        // Add for JADE compiling
+        'jade:dev',
     // --- End Custom tasks
     'copy:dev',
     'coffee:dev'

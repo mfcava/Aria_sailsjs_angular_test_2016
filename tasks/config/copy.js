@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         cwd: './assets',
         // Before: src: ['**/*.!(coffee|less)'],
         // Add |html for not override the minification task
-        src: ['**/*.!(coffee|less|scss|sass|html)'],
+        src: ['**/*.!(coffee|less|scss|sass|html|jade)'],
         dest: '.tmp/public'
       }]
     },

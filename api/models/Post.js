@@ -36,6 +36,11 @@ module.exports = {
             via: 'posts',
             dominant: true // ---
         },
+        metatags: {
+            collection: 'Metatag',
+            via: 'owned',
+            dominant: true // ---
+        },
         comments: {
             collection: 'Comment',
             via: 'post_owner'

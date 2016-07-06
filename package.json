@@ -45,6 +45,8 @@
   "author": "Marco F. Cavaliere",
   "license": "N/A",
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "grunt-contrib-jade": "^1.0.0",
+    "jade": "^1.11.0"
   }
 }
