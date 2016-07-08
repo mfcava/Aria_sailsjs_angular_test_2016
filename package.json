@@ -22,6 +22,7 @@
     "grunt-contrib-sass": "*",
     "grunt-contrib-uglify": "0.7.0",
     "grunt-contrib-watch": "0.5.3",
+    "grunt-contrib-jade": "*",
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.2.4",
     "html-minifier": "^2.1.5",
