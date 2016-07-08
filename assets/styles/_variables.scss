@@ -1,0 +1,15 @@
+/*  -----------------------------------------------------------------------------
+    Above the Fold Styles
+    Variables.
+    -------------------------------------------------------------------------- */
+
+    $color_backgroud:                   $body-bg;
+    $color_backgroud_contrast:          darken($color_backgroud,10%);
+    $color_accent:                      $brand-primary;
+    $color_disabled:                    #777;
+    $color_home_main_post_background:   $color_backgroud;
+    $color_home_main_post_accent:       $color_accent;
+    $color_post_detail_background:      $body-bg;
+    $color_post_detail_accent:          $color_accent;
+    $font-color:                        #000;
+    $font-color-light:                  $body-bg;

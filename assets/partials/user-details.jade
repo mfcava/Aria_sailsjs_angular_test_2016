@@ -1,0 +1,20 @@
+
+.container
+	//- User Home page
+	//- ---------------------------
+	.row
+		h1 {{user.nickname}}'s home
+		h2 {{user.nickname}}
+			small {{user.auth.email}}
+		p
+			span.label.label-default(ng-repeat="role in user.roles") {{role.name}}
+
+		.col-md-6
+			h4 User's posts
+	
+			p(ng-repeat="post in user.posts")
+				a(href="/post/{{post.id}}") {{post.title}}
+	
+		.col-md-6
+			h4 Mail Status
+			p(ng-repeat="m in mailchimp") ...

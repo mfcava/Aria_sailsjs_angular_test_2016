@@ -16,8 +16,10 @@ module.exports = function(grunt) {
     'less:dev',
     // Add for SASS compiling
     'sass:dev',
-    // Add for JADe compiling
+    // Add for JADE compiling
     'jade:dev',
+    // Add for HTML minify
+    'htmlmin:dev',
     'sync:dev',
     'coffee:dev'
   ]);

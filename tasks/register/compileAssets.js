@@ -19,10 +19,10 @@ module.exports = function(grunt) {
     // --- Custom tasks
         // Add for SASS compiling
         'sass:dev',
-        // Add for HTML minify
-        'htmlmin:dev',
         // Add for JADE compiling
         'jade:dev',
+        // Add for HTML minify
+        'htmlmin:dev',
     // --- End Custom tasks
     'copy:dev',
     'coffee:dev'

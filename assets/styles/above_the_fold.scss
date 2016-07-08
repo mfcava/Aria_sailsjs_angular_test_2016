@@ -7,26 +7,14 @@
     Basic Bootstrap Import.
     ------------------------------------------------------------------------- */
     @import 'above_the_fold_bootstrap.scss';
+    @import 'variables.scss';
 
 
 
 
 
-/*  -----------------------------------------------------------------------------
-    Above the Fold Styles
-    Variables.
-    -------------------------------------------------------------------------- */
 
-    $color_backgroud:                   $body-bg;
-    $color_backgroud_contrast:          darken($color_backgroud,10%);
-    $color_accent:                      $brand-primary;
-    $color_disabled:                    #777;
-    $color_home_main_post_background:   $color_backgroud;
-    $color_home_main_post_accent:       $color_accent;
-    $color_post_detail_background:      $body-bg;
-    $color_post_detail_accent:          $color_accent;
-    $font-color:                        #000;
-    $font-color-light:                  $body-bg;
+
 
 /* -----------------------------------------------------------------------------
    Above the Fold Styles
@@ -37,6 +25,18 @@
    @font-face { font-family: Brandon_Medium; src: url(/fonts/brandon/Brandon_med.otf)};
    @font-face { font-family: Brandon_Bulk;   src: url(/fonts/brandon/Brandon_blk.otf)};
 
+   @font-face {
+       font-family: 'Open Sans';
+       font-style: normal;
+       font-weight: 300;
+       src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+   }
+   @font-face {
+       font-family: 'Open Sans';
+       font-style: normal;
+       font-weight: 400;
+       src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+   }
 
 
 
@@ -88,6 +88,12 @@
     .navbar-default {
         background-color: rgba(0, 0, 0, 0.4);
         border-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar-brand > img {
+        width: 32px;
+        margin-left: 1rem;
+        margin-top: -0.7rem;
     }
 
 /*  ----------------------------------------------------------------------------

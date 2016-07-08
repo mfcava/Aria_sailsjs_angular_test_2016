@@ -2,13 +2,23 @@ module.exports = function(grunt) {
 
     grunt.config.set('sass', {
         dev: {
-            files: [{
+            files: [
+                {
                 expand: true,
                 cwd: 'assets/styles/',
                 src: ['importer.scss'],
                 dest: '.tmp/public/styles/',
                 ext: '.css'
-            }]
+                },
+                {
+                expand: true,
+                cwd: 'assets/styles/',
+                src: ['above_the_fold.scss'],
+                dest: 'assets/templates/',
+                ext: '.css'
+                },
+
+            ]
         }
     });
 

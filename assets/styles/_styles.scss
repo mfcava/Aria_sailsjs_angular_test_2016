@@ -4,6 +4,9 @@
 
     ------------------------------------------------------------------------- */
 
+    @import 'variables.scss';
+
+
     .post-tag      { margin-right: 0.5em; margin-bottom: 1em;}
     .sign-up       { background: $color_backgroud_contrast; padding-bottom: 2rem;}
     .flash-message { margin-top: 1.5em;}
@@ -162,7 +165,7 @@
             }
             .left {
                 article {
-                    
+
                 }
             }
         }

@@ -16,11 +16,16 @@
  */
 module.exports = function(grunt) {
 
-  grunt.config.set('cssmin', {
-    dist: {
-      src: ['.tmp/public/concat/production.css'],
-      dest: '.tmp/public/min/production.min.css'
-    }
+    grunt.config.set('cssmin', {
+        dist: [{
+            src: ['.tmp/public/concat/production.css'],
+            dest: '.tmp/public/min/production.min.css'
+        },
+        {
+            src: ['.tmp/public/templates/above_the_fold.css'],
+            dest: '.tmp/public/templates/above_the_fold.css'
+        }
+  ]
   });
 
   grunt.loadNpmTasks('grunt-contrib-cssmin');

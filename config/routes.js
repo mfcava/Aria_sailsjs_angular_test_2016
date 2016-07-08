@@ -31,9 +31,9 @@ module.exports.routes = {
     * `assets` directory)                                                      *
     *                                                                          *
     ***************************************************************************/
-    'GET /': {
-        view: 'homepage'
-    },
+    // 'GET /': {
+    //    view: 'homepage'
+    // },
     '/soon': {
         controller:'Home',
         view: 'soon',

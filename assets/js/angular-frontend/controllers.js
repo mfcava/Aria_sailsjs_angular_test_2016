@@ -49,11 +49,29 @@ AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post 
 // ---- ------------------------------------------------------------------- ---
 
 AriaControllers.controller('UsersCtrl', ['$scope', 'User', function($scope, User) {
-  $scope.users = User.query();
+    $scope.users = User.query();
 }]);
 
-AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
-  $scope.user = User.get({UserId: $routeParams.UserId});
+AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User','$http', function($scope, $routeParams, User, $http) {
+
+    $scope.mailchimp;
+
+    $scope.user = User.get({UserId: $routeParams.UserId});
+
+    $http({
+        method: 'GET',
+        header: {
+            'apikey': '3e16043a238414ad19b333a4a8f793d4-us5'
+        },
+        url: 'https://us5.api.mailchimp.com/3.0/lists/d297c1caa1/members/11b5323051f5fd65dc54894edfcc0c14/'
+    })
+    .then(function successCallback(response) {
+        console.log(response);
+        },
+        function errorCallback(response) {
+            console.log('Error on Mailchimp API: "/api/post/count/""');
+        }
+    );
 }]);
 
 
@@ -117,10 +135,11 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User', fu
         .then(function successCallback(response) {
             $scope.totalPost = response.data.count-1;
             $scope.pageNumber = Math.ceil( $scope.totalPost / $scope.elementInPage);
-        },
-        function errorCallback(response) {
-            console.log('Error on: "/api/post/count/""');
-        });
+            },
+            function errorCallback(response) {
+                console.log('Error on: "/api/post/count/""');
+            }
+        );
 
         $scope.changeImageName = function (message) {
 		        var f = jQuery.parseJSON(message.substr(message.indexOf("[")+1,message.lastIndexOf("]")-1));

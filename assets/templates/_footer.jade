@@ -1,0 +1,55 @@
+footer.footer
+    //- FOOTER
+    //- ------------------------------
+    .container-fluid.navbar-inverse
+        .row.col-lg-12
+            h1.organization-name
+                span.text-logo
+                    span.capital M
+                    |illenial
+                    span.capital M
+                    |arketing
+            nav
+                ul.col-lg-3.col-md-3.col-sm-6.list-unstyled
+                    li
+                        h2 About
+                    li
+                        a(href="/about/") The Project
+                    li
+                        a(href="/for-mac/") For Mac
+                    li
+                        a(href="/accounts/pricing/") Pricing
+                    li
+                        a(href="http://api.thenounproject.com") API
+                ul.col-lg-3.col-md-3.col-sm-6.list-unstyled(itemscope,itemtype="http://schema.org/Organization")
+                    li
+                        h2 Contact
+                    li
+                        a(target="_blank",href="http://www.mokamarketing.com", itemprop="url") Website
+                    li
+                        a(target="_blank",href="http://twitter.com/ilproff77",itemprop="sameAs") Twitter
+                    li
+                        a(target="_blank",href="http://instagram.com/ilproff77",itemprop="sameAs") Instagram
+                    li
+                        a(target="_blank",href="https://facebook.com/millenialsmarketing",itemprop="sameAs") Feedback
+                ul.col-lg-3.col-md-3.col-sm-6.list-unstyled
+                    li
+                        h2 Legal
+                    li
+                        a(href="/legal#terms") Terms of Use
+                    li
+                        a(href="/legal#privacy") Privacy Policy
+                    li
+                        a(href="/legal#creators") Creators Terms
+                    li
+                        a(href="https://thenounproject.zendesk.com/hc/en-us",target="_blank") Frequent Questions
+                ul.col-lg-3.col-md-3.col-sm-6.list-unstyled
+                    li
+                        h2 Newsletter Subscription
+                    li
+                        form.email-signup.mailer(id="email-updates",action="/mailing-list/subscribe/",name="mc-embedded-subscribe-form",method="post",novalidate="")
+                            input(id="EMAIL",name="email",placeholder="Email Address",type="email")
+                            label(for="EMAIL") To receive our updates via email
+    .clearfix
+    //- ------------------------------
+    // FOOTER END

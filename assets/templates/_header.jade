@@ -1,0 +1,54 @@
+nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
+    //- NAVIGATION BAR
+    //- ------------------------------
+    .container-fluid
+        //- Brand and toggle get grouped for better mobile display
+        .navbar-header
+            button.navbar-toggle collapsed(type="button", data-toggle="collapse",data-target="#bs-example-navbar-collapse-1")
+            .span.sr-only
+                Toggle navigation
+            .span.icon-bar
+            .span.icon-bar
+            .span.icon-bar
+            a.navbar-brand(href="#")
+                img(alt="Aria Projects v.0.01",src="/images/logo.gif")
+        .collapse.navbar-collapse(id="bs-example-navbar-collapse-1")
+            //- Main Menu Link
+            ul.nav.navbar-nav
+                li.active
+                    a(href="/")
+                        span.text-logo
+                            span.capital
+                                |M
+                            |illenial
+                            span.capital
+                                |M
+                            |arketing
+                        span.sr-only.
+                            (current)
+                li
+                    a(href="/post") Posts
+                li
+                    a(href="/user") Users
+            ul.nav.navbar-nav.navbar-right
+                //- Menu Tools
+                li(ng-show="Token")
+                    a(href="/post/new") New Posts
+                li.dropdown
+                    a.dropdown-toggle(href="",data-toggle="dropdown",role="button",aria-expanded="false") 
+                        |Login
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-hide="Token")
+                            form.navbar-form
+                            .form-group
+                                input.form-control(ng-model="email",type="text",placeholder="Email")
+                            .form-group
+                                input.form-control(ng-model="password",type="password",placeholder="Password")
+                            button.btn.btn-success(type="submit",ng-click="signIn()") Sign in
+                        li(ng-show="Token")
+                            a(href="/user/{{currentUser.id}}") {{currentUser.nickname}} Profile
+                        li.divider(ng-show="Token")
+                        li(ng-show="Token")
+                            a(href="", ng-click="signOut()") Logout
+    //- NAVIGATION BAR END
