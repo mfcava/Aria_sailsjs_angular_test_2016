@@ -16,10 +16,17 @@
  */
 module.exports = function(grunt) {
 
-    grunt.config.set('_cssmin', {
+    grunt.config.set('cssmin', {
+        options: {
+            keepSpecialComments: 0
+        },
         dist: {
-            src: ['.tmp/public/concat/production.css'],
-            dest: '.tmp/public/min/production.min.css'
+            // src: ['.tmp/public/concat/*.css', '!.min.css'],
+            // dest: '.tmp/public/min/production.min.css'
+            files: {
+                'assets/templates/above_the_fold.css': ['assets/templates/above_the_fold.css'],
+                '.tmp/public/min/production.min.css': ['.tmp/public/concat/production.css']
+            }
         }
     });
 

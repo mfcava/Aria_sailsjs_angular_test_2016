@@ -22,6 +22,7 @@ module.exports = function(grunt) {
         // Add for JADE compiling
         'jade:dev',
         // Add for HTML minify
+        'cssmin',
         'htmlmin:dev',
     // --- End Custom tasks
     'copy:dev',

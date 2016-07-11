@@ -19,15 +19,15 @@ module.exports = function(grunt) {
             pretty: false,
             client: false
             // namespace: 'Templates'
-    },
-    files: [{
-        expand: true,
-        cwd: 'assets/',
-        src: ['**/!(_)*.jade'],
-        dest: '.tmp/public/',
-        ext: '.html'
-    }]
-  }
+        },
+        files: [{
+            expand: true,
+            cwd: 'assets/',
+            src: ['**/!(_)*.jade'],
+            dest: '.tmp/public/',
+            ext: '.html'
+        }]
+    }
 
   });
 
