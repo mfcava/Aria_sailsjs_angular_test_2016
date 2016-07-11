@@ -56,23 +56,8 @@ AriaControllers.controller('UsersCtrl', ['$scope', 'User', function($scope, User
 AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User','$http', function($scope, $routeParams, User, $http) {
 
     $scope.mailchimp;
-
     $scope.user = User.get({UserId: $routeParams.UserId});
 
-    $http({
-        method: 'GET',
-        header: {
-            'apikey': '3e16043a238414ad19b333a4a8f793d4-us5'
-        },
-        url: 'https://us5.api.mailchimp.com/3.0/lists/d297c1caa1/members/11b5323051f5fd65dc54894edfcc0c14/'
-    })
-    .then(function successCallback(response) {
-        console.log(response);
-        },
-        function errorCallback(response) {
-            console.log('Error on Mailchimp API: "/api/post/count/""');
-        }
-    );
 }]);
 
 

@@ -13,7 +13,7 @@ module.exports = {
 	show: function (req, res) {
 		if(req.method !== 'GET')
 			return res.json({'status':'Only GET is allowed'});
-		sails.log.debug('HomeController.js: -----');
+		// sails.log.debug('HomeController.js: -----');
 		var fs = require("fs");
 		var fileName = sails.config.appPath+"/assets/styles/importer.css";
 		sails.log.debug('check for file: '+fileName);
@@ -26,7 +26,7 @@ module.exports = {
 				});
 			}
 		});
-		sails.log.debug('end check for file');
+		// sails.log.debug('end check for file');
 		return res.send(200, 'ok');
 	}
 

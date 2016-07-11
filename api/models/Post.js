@@ -54,7 +54,7 @@ module.exports = {
     },
 
     beforeCreate: function (values, cb) {
-        sails.log("Post.js: "+values.title);
+        // sails.log("Post.js: "+values.title);
         if (values.title === '') {
             var err = {
                 code: 'E_UNIQUE',
@@ -82,7 +82,7 @@ module.exports = {
         },
 
         beforeUpdate: function (values, cb) {
-            sails.log("Post.js - Update: "+values.title);
+            // sails.log("Post.js - Update: "+values.title);
             if (values.title === '') {
                 var err = {
                     code: 'E_UNIQUE',
