@@ -18,7 +18,6 @@
  */
 module.exports = function (grunt) {
   grunt.registerTask('default', [
-      'cssmin',
       'compileAssets',
       'linkAssets',
       'watch']);

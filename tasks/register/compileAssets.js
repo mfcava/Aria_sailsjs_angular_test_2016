@@ -20,9 +20,9 @@ module.exports = function(grunt) {
         // Add for SASS compiling
         'sass:dev',
         // Add for JADE compiling
+        'cssmin',
         'jade:dev',
         // Add for HTML minify
-        'cssmin',
         'htmlmin:dev',
     // --- End Custom tasks
     'copy:dev',
