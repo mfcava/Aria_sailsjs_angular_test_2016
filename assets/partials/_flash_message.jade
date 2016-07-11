@@ -1,0 +1,8 @@
+//- Flash messages
+.col-lg-12.alert.alert-warning.alert-dismissible.flash-message(role="alert",ng-show="flash.getMessage()")
+	button.close(type="button",data-dismiss="alert",aria-label="Close")
+		span(aria-hidden="true") &times;
+		p
+			strong Whassup:
+			|{{flash.getMessage()}}
+//- End Flash messages

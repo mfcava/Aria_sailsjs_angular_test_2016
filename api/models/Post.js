@@ -25,6 +25,12 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
+        publishedBy: {
+            type: 'datetime',
+            defaultsTo: function () {
+                return new Date();
+            }
+        },
         content:     'string',
         coverImage:  'string',
         layoutClass: 'string',

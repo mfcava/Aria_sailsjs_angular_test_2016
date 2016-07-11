@@ -1,0 +1,116 @@
+// Article & Post edit form
+article.post-detail.edit
+	.container-fluid
+		.row
+			//- First Column
+			.col-lg-6.coverpad
+				//- Cover Image
+				.cover.fill(ng-style="{'background-image':'url(/images/upload/'+post.coverImage+')'}")
+				//- Cover Image
+				hr
+				.col-lg-12
+					//- Upload
+					.panel.panel-default
+						.panel-heading
+							h3.panel-title Upload Cover Image
+						.panel-body
+							div(flow-init="{target: '/api/file/upload', testChunks:false }",flow-files-submitted="$flow.upload()",flow-file-success="changeImageName($message); $file.msg = $message;")
+								span.btn.btn-default(flow-btn) Upload File
+								table.debug
+									tr(ng-repeat="file in $flow.files")
+										td {{$index+1}}
+										td {{file.msg}}
+					//- tags
+					.panel.panel-default
+						.panel-heading
+							h3.panel-title Related Tag
+						.panel-body
+							.col-lg-6
+								|Content's Tag
+								span.label.label-primary.post-tag(ng-repeat="tag in post.tags")
+									span.glyphicon.glyphicon-remove(aria-hidden="true",ng-click="removeTag(tag.id)")
+									|{{tag.name}}
+							.col-lg-6
+								h4 Add Tags
+								hr
+								span suggested tags:
+								div
+									span.label.label-primary.post-tag(ng-repeat="t in autocompleteTags",ng-model="autocompleteTags" ng-click="addTag(t.id)")
+										span.glyphicon.glyphicon-tags.post-tag(aria-hidden="true")
+										|{{t.name}}
+								input#searchTag.form-control( type="text",name="searchTag",ng-model="searchTag",placeholder="Add one tag at time...",ng-change="findTag(searchTag)",ng-enter="addNewTag(searchTag)")
+
+			//- Second Column
+			.col-lg-6
+				//- Flash messages
+				include _flash_message.jade
+				//- Tool bar
+				.col-lg-12.btn-group.tool(role="group",aria-label="...",ng-show="post.owned.id == currentUser.id")
+					button.btn.btn-default(type="button",ng-click="deletePost()") Delete
+					button.btn.btn-default(type="button",ng-click="savePost()") Save
+					button.btn.btn-default(type="button",ng-click="") New
+				.clearfix
+				//- End Tool bar
+				//-
+				//- Edit form
+				.panel.panel-default
+					.panel-heading
+						h3.panel-title Edit Post
+					.panel-body
+						form#PostEditForm.col-md-12.clearfix
+							input(type="hidden",name="id",ng-model="post.id",value="{{post.id}}")
+							input(type="hidden",name="coverImage",ng-model="post.coverImage",value="{{post.coverImage}}")
+							input(type="hidden",name="metatags.id",ng-model="posts.metatags.id",value="{{post.metatags.id}}")
+							.form-group
+								label(for="PostTitle") Title
+								small
+									|  Post Id: {{post.id}} -
+									|  Added by
+									a(href="#/user/{{post.owned.id}}")
+										|  Owner: {{post.owned.nickname}}
+									|  - (id: {{post.owned.id}})
+								input#name.form-control(type="text",placeholder="Insert Post Title...",value="{{post.title}}",ng-model="post.title")
+							.col-md-6
+								.checkbox(ng-switch="post.homePage")
+									input(type="hidden",name="homePage",value="false")
+									label
+										input(ng-switch-when="true",type="checkbox",name="homePage",ng-model="post.homePage",value="true",checked)
+										input(ng-switch-default,type="checkbox",name="homePage",ng-model="post.homePage",value="true")
+										| Show in Home Page
+								.checkbox(ng-switch="post.homePageCover")
+									label
+										input(type="hidden",name="homePage",value="false")
+										input(ng-switch-when="true",type="checkbox",name="homePage",ng-model="post.homePageCover",value="true",checked)
+										input(ng-switch-default,type="checkbox",name="homePage",ng-model="post.homePageCover",value="true")
+										| Set this post as Home Page Cover
+							.col-md-6
+								.form-group
+									label(for="publishedBy") Published on:
+									input#publishedBy.form-control(type="text",value="{{post.publishedBy}}",ng-model="post.publishedBy",placeholder="YYYY-MM-DDT00:00:00.000Z")
+							//- content
+							.form-group.body
+								label(for="postContent") Body
+								textarea#content.form-control(placeholder="Insert your post...",ng-model="post.content") {{post.content}}
+							
+							//- Layout Helper 
+							.form-group
+								label(for="layoutClass") Layout Class
+								input#layoutClass.form-control(type="text",placeholder="Insert Helper Class for Layout...",value="{{post.layoutClass}}",ng-model="post.layoutClass")
+							hr
+							button.btn.btn-default(type="submit",ng-click="savePost()") Save
+						//- End Edit form 
+				//- Meta Tags
+				.panel.panel-default
+					.panel-heading
+						h3.panel-title Metatags
+					.panel-body
+						form#MetaDataForm.col-md-12.clearfix
+							input(type="hidden",name="metatags.id",ng-model="post.metatags[0].id",value="{{post.metatags[0].id}}")
+							.form-group
+								label(for="PostTitle") Meta-Title
+								input#metadata_Title.form-control(type="text",placeholder="Insert Post Meta-Title...",value="{{post.metatags[0].title}}",ng-model="post.metatags[0].title")
+							.form-group
+								label(for="PostTitle") Meta-Description
+								textarea#matadata_Desc.form-control(placeholder="Insert Meta Description...",ng-model="post.metatags[0].description") {{post.metatags[0].description}}
+							button.btn.btn-default(type="submit",ng-click="addNewMetaTag()") Save
+// Article & Post edit form

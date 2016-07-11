@@ -19,7 +19,8 @@ AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post 
 
     $scope.postPreviewLimit = 350;
     $scope.sortBy = 'createdAt DESC';
-    $scope.coverPost   = Post.query({skip: 0 ,limit: 1, sort: $scope.sortBy, where: '{"homePageCover":"true"}' } );
+    var today = new Date();
+    $scope.coverPost   = Post.query({limit: 1, sort: $scope.sortBy, where: '{"homePageCover":"true","publishedBy": {"<=": "'+today+'", "!":"null"}}' } );
     $scope.homePosts   = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePageCover":{"!":["true","null"]},"homePage":"true"}' } );
     $scope.latestPosts = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePage": [null,"false"]}' } );
 
