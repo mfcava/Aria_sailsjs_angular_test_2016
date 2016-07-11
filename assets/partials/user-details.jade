@@ -17,4 +17,7 @@
 	
 		.col-md-6
 			h4 Mail Status
-			p(ng-repeat="m in mailchimp") ...
+			p(ng-repeat="m in mailchimp")
+				p
+					strong Status: 
+					| {{mailchimp.status}}

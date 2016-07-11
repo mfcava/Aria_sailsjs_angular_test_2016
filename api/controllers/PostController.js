@@ -63,7 +63,7 @@ module.exports = {
             //  ---
             //	Call not via GET is error
             //  ---
-        console.log("PostController.js show: "+req.param('title_slug'));
+        // sails.log.debug("PostController.js show: "+req.param('title_slug'));
         Post.findOneByTitle_slug(req.param('title_slug')).populateAll()
             .exec(function(err,post){
                 if(err)

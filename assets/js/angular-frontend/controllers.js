@@ -54,9 +54,21 @@ AriaControllers.controller('UsersCtrl', ['$scope', 'User', function($scope, User
 }]);
 
 AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User','$http', function($scope, $routeParams, User, $http) {
-
+    $scope.user;
     $scope.mailchimp;
-    $scope.user = User.get({UserId: $routeParams.UserId});
+
+    User.get({UserId: $routeParams.UserId})
+        .$promise.then( function(val) {
+            $scope.user = val;
+            $http({
+                method: 'GET',
+                url: '/api/user/'+val.id+'/mail'
+            })
+            .then(function successCallback(response) {
+                console.log(response.data);
+                $scope.mailchimp = response.data;
+            });
+        });
 
 }]);
 
