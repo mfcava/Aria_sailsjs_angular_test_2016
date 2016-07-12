@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         'sails-linker:prodStylesJade',
         'sails-linker:devTplJade',
         // Add for HTML minify
-        'htmlmin:dev'
+        // 'htmlmin:dev'
     ]);
 
     grunt.registerTask('heroku:production', [
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
         'sails-linker:prodStylesJade',
         'sails-linker:devTplJade',
         // Add for HTML minify
-        'htmlmin:dev'
+        // 'htmlmin:dev'
     ]);
 
 };

@@ -14,12 +14,14 @@ module.exports = function(grunt) {
   grunt.registerTask('syncAssets', [
     'jst:dev',
     'less:dev',
-    // Add for SASS compiling
-    'sass:dev',
-    // Add for JADE compiling
-    'jade:dev',
-    // Add for HTML minify
-    'htmlmin:dev',
+    // --- Custom tasks
+        // Add for SASS compiling
+        'sass:dev',
+        // Add for JADE compiling
+        'jade:dev',
+        // Add for HTML minify
+        // 'htmlmin:dev',
+    // --- Custom tasks
     'sync:dev',
     'coffee:dev'
   ]);
