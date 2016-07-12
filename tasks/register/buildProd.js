@@ -24,6 +24,8 @@ module.exports = function(grunt) {
     'jade:dev',
     'linkAssetsBuildProd',
     'clean:build',
-    'copy:build'
+    'copy:build',
+    // Add for HTML minify
+    'htmlmin:dev'
   ]);
 };
