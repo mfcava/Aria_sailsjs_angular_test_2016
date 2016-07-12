@@ -13,6 +13,9 @@
  */
 module.exports = function(grunt) {
     grunt.registerTask('prod', [
+        'sails-linker:prodJsJade',
+        'sails-linker:prodStylesJade',
+        'sails-linker:devTplJade',
         'compileAssets',
         'concat',
         'uglify',
@@ -28,6 +31,9 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('heroku:production', [
+        'sails-linker:prodJsJade',
+        'sails-linker:prodStylesJade',
+        'sails-linker:devTplJade',
         'compileAssets',
         'concat',
         'uglify',
