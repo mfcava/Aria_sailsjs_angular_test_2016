@@ -9,9 +9,9 @@ module.exports = function(grunt) {
             },
             files: [{
                 expand: true,
-                cwd: 'assets/partials/',
-                src: '*.html',
-                dest: '.tmp/public/partials/',
+                cwd: '.tmp/public/',
+                src: ['**/*.html'],
+                dest: '.tmp/public/',
             }]
         }
     });

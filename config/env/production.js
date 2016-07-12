@@ -29,7 +29,7 @@ module.exports = {
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
    ***************************************************************************/
-
+   mailChimpApiKey: process.env.MAILCHIMPAPIKEY
   // log: {
   //   level: "silent"
   // }

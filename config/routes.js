@@ -49,9 +49,13 @@ module.exports.routes = {
     * for configuration options and examples.                                  *
     *                                                                          *
     ***************************************************************************/
-    'GET /api/user/:id/mail': {
-        controller: 'User',
-        action: 'mail'
+    'GET /api/mailing_list/:id/mail_status': {
+        controller: 'mailing_list',
+        action: 'mail_status'
+    },
+    'POST /api/mailing_list/:email': {
+        controller: 'mailing_list',
+        action: 'subscribe'
     },
     '/api/got/image/:filename':       'FileController.showImage',
     '/api/got/image/:filename/:size': 'FileController.showImage',

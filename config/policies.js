@@ -45,6 +45,9 @@ module.exports.policies = {
 	HomeController: {
 		show: true
 	},
+	Mailing_listController: {
+		'*': true
+	},
 	CommentController: {
 		'*': true
 		}

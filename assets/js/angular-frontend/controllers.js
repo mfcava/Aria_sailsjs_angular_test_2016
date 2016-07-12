@@ -62,7 +62,7 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User','$h
             $scope.user = val;
             $http({
                 method: 'GET',
-                url: '/api/user/'+val.id+'/mail'
+                url: '/api/user/'+val.id+'/mail_status'
             })
             .then(function successCallback(response) {
                 console.log(response.data);
