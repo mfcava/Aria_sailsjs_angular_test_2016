@@ -1,0 +1,28 @@
+button.btn.btn-primary.btn-small(type="button",data-toggle="modal",data-target="#CommentModal") Insert new Comment
+hr
+
+//- Partial for Comments
+aria-comments(listcomments="postComments",parent-id="''",show-modal="showModal('#CommentModal',parent)",delete-comment="deleteComment(commentIndex)")
+//- Partial for Comments - END
+
+
+#CommentModal.modal.fade(tabindex="-1",role="dialog",aria-labelledby="Comment Modal Box")
+    //- Modal: Comment New 
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(type="button",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true") &times;
+                    h4.modal-title Modal title
+            .modal-body
+                p Insert your comment here...
+                .input-group
+                    input(type="hidden",id="comment_id",name="comment_id",ng-model="newComment.id")
+                    input(type="hidden",id="comment_parent",name="comment_parent",ng-model="newComment.parent")
+                    input(type="hidden",id="comment_owner",name="comment_owned",ng-model="newComment.owned")
+                    input(type="hidden",id="comment_post_owner",name="comment_post",ng-model="newComment.post_owner")
+                    textarea(type="text",class="form-control",id="comment_text",name="comment_text",ng-model="newComment.text",placeholder="Insert your comment...")
+            .modal-footer
+                button.btn.btn-default(type="button",data-dismiss="modal") Close
+                button.btn.btn-primary(type="button",ng-click="addNewComment();") Save changes
+    //- Modal: Comment New 

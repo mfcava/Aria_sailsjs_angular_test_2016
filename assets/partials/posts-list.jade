@@ -1,0 +1,38 @@
+section#contents_list
+	//- Section POST
+	.container-fluid
+		.row.home-main-post(ng-repeat="cover in latestPost | limitTo:1",id="post-{{cover.id}}",ng-style="{'background-image':'url(/api/got/image/'+cover.coverImage+')'}")
+			//- First Row
+			.col-lg-4.col-lg-offset-1.ribbon
+				.home_intro
+					h2
+						a(href="/post/{{cover.id}}/") {{cover.title}}
+					h3 
+						| article wrote by 
+						a(href="/user/{{cover.owned.id}}") {{cover.owned.nickname}}
+
+						p {{cover.content | limitTo:postPreviewLimit }}...
+						center
+							a(href="/post/{{cover.id}}/")
+								button.btn.btn-primary.home-cta(type="button") Read More
+			//- First Row - END
+		.home-other-post(infinite-scroll="setPage(currentPage+1)",infinite-scroll-distance="3")
+			//- Second Row and following row...
+			.section(ng-repeat="post in posts",id="post-{{post.id}}")
+				.first(ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}")
+					.row(class="{{post.layoutClass}})")
+						article.col-lg-6.col-lg-offset-1.section-container
+							h2
+								small 
+									| article wrote by 
+									a(href="/user/{{post.owned.id}}") {{post.owned.nickname}}
+								br
+								a(href="/post/{{post.id}}/") {{post.title}}
+							p {{post.content | limitTo:postPreviewLimit }}...
+							center
+								a(href="/post/{{post.id}}/")
+									button.btn.btn-primary.home-cta(type="button") Read More
+			div(ng-show='busy')
+				|Loading data
+			//- Second Row - END
+	//- Section POST - END

@@ -1,8 +1,10 @@
 //- Flash messages
-.col-lg-12.alert.alert-warning.alert-dismissible.flash-message(role="alert",ng-show="flash.getMessage()")
-	button.close(type="button",data-dismiss="alert",aria-label="Close")
-		span(aria-hidden="true") &times;
+.col-lg-5.col-lg-offset-7.flash-message
+	.alert.alert-dismissible(class="{{m.type}}",ng-repeat="m in flashMessage",role="alert",ng-show="flashMessage")
+		button.close(type="button",data-dismiss="alert",aria-label="Close")
+			span(aria-hidden="true") &times;
 		p
 			strong Whassup:
-			|{{flash.getMessage()}}
+			b 
+			| {{ m.detail }}
 //- End Flash messages

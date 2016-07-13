@@ -9,7 +9,7 @@
 
     .post-tag      { margin-right: 0.5em; margin-bottom: 1em;}
     .sign-up       { background: $color_backgroud_contrast; padding-bottom: 2rem;}
-    .flash-message { margin-top: 1.5em;}
+    .flash-message { position: fixed; top: 4.5em; z-index:1000}
 
     .footer {
         bottom: 0; width: 100%;  height: 60px; background-color: $color_backgroud;

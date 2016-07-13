@@ -1,0 +1,17 @@
+script(type="text/ng-template", id="categoryTree")
+    p {{comment.text}}
+    br
+    small
+        span(ng-if="comment.owned.id != '' ")
+            | wrote by 
+            a(href="/user/{{comment.owned.id}}") {{comment.owned.nickname}}
+        | - {{comment.createdAt}}
+        p
+            button(ng-click="showModal({parent: comment.id})") reply | 
+            button(ng-click="deleteComment({commentIndex: comment.id})") delete
+        ul(ng-if="comment.haschild")
+            li(ng-repeat="comment in listcomments | filter: {parent: comment.haschild}",ng-include="'categoryTree'",id="comment-id-{{comment.id}}")
+
+//- Partial for Comments
+ul
+    li(ng-repeat="comment in listcomments" ng-include="'categoryTree'" ng-if="comment.parent == parentId")

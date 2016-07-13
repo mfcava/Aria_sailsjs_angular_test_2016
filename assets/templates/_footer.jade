@@ -31,7 +31,7 @@ footer.footer
                     li
                         a(target="_blank",href="http://instagram.com/ilproff77",itemprop="sameAs") Instagram
                     li
-                        a(target="_blank",href="https://facebook.com/millenialsmarketing",itemprop="sameAs") Feedback
+                        a(target="_blank",href="https://facebook.com/millenialsmarketing",itemprop="sameAs") Facebook
                 ul.col-lg-3.col-md-3.col-sm-6.list-unstyled
                     li
                         h2 Legal
@@ -47,9 +47,9 @@ footer.footer
                     li
                         h2 Newsletter Subscription
                     li
-                        form.email-signup.mailer(id="email-updates",action="/mailing-list/subscribe/",name="mc-embedded-subscribe-form",method="post",novalidate="")
-                            input(id="EMAIL",name="email",placeholder="Email Address",type="email")
-                            label(for="EMAIL") To receive our updates via email
+                        form.email-signup.mailer(id="newsletter_subscribe", ng-submit="newsletter_subscribe('gg.it')")
+                            input(id="email",name="email",placeholder="Email Address",type="email")
+                            label(for="email") To receive our updates via email
     .clearfix
     //- ------------------------------
     // FOOTER END

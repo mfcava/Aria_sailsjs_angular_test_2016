@@ -72,16 +72,14 @@ AriaApp.run(['$rootScope','$localStorage','$location','$analytics', function($ro
 		'canonical': '/'
 	};
 
-	$rootScope.metadata = $rootScope.metadata_def
+	$rootScope.metadata = $rootScope.metadata_def;
+
+	$rootScope.flashMessage = [];
 
 	$rootScope.$on('newPageLoaded', function(event, metadata) {
 		$rootScope.metadata = metadata;
 		setTimeout(function(){ $analytics.pageTrack($location.path() ) }, 1000);
 	});
-
-	//$rootScope.$on('routeChangeSuccess', function(event, metadata) {
-	//	setTimeout(function(){ $analytics.pageTrack($location.path()+'/' ) }, 10);
-	//});
 
 } ]);
 
@@ -116,7 +114,7 @@ AriaApp.config(['$routeProvider','$locationProvider','$httpProvider','$analytics
 	$routeProvider
 	.when('/', {
 		templateUrl: '/partials/home.html',
-		controller:  'AriaCtrl' })
+		controller:  'AriaCtrlHome' })
 	.when('/user', {
 		templateUrl: '/partials/users-list.html',
 		controller:  'UsersCtrl' })
@@ -147,7 +145,7 @@ AriaApp.config(['$routeProvider','$locationProvider','$httpProvider','$analytics
 	// --- ---------------------------------------------- ---
 	.otherwise({
 		redirectTo: '/',
-		controller: 'AriaCtrl'});
+		controller: 'AriaCtrlHome'});
 
 
 

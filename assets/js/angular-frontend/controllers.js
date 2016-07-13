@@ -11,6 +11,19 @@ var AriaControllers = angular.module('AriaControllers', ['flow']);
 
 AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post ) {
     // console.log('Controller.js - Root Controller');
+    // $scope.$emit('newPageLoaded', {
+    //  'title': 'Millenials Marketing',
+    //  'description': 'Marketing for millenials brand',
+	//  'keywords': 'Marketing, Millenials, Brands',
+    // });
+
+} ]);
+
+
+
+
+AriaControllers.controller('AriaCtrlHome', ['$scope', 'Post', function($scope, Post ) {
+    // console.log('Controller.js - Root Controller');
     $scope.$emit('newPageLoaded', {
         'title': 'Millenials Marketing',
         'description': 'Marketing for millenials brand',
@@ -24,11 +37,9 @@ AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post 
     $scope.homePosts   = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePageCover":{"!":["true","null"]},"homePage":"true"}' } );
     $scope.latestPosts = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePage": [null,"false"]}' } );
 
+
+
 } ]);
-
-
-
-
 
 
 
@@ -116,15 +127,17 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User','$h
         $scope.busy =  false;
 
         $scope.latestPost = Post.query({
-            skip: 0 ,
+            skip: 0,
             limit: 1,
             sort: $scope.sortBy,
-            where: '{"homePageCover": {"!": ["true","null"]}}'  } );
+            where: '{"homePageCover":{"!":["true","null"]}}'
+        });
         $scope.posts = Post.query({
+            sort: $scope.sortBy,
             skip: ($scope.currentPage*$scope.elementInPage)+1,
             limit: $scope.elementInPage,
-            sort: $scope.sortBy,
-            where: '{"homePageCover": {"!": ["true","null"]}}' } );
+            where: '{"homePageCover":{"!":["true","null"]}}'
+        });
 
         $http({
             method: 'GET',

@@ -75,16 +75,37 @@ var AriaDirective = angular.module('AriaDirective', []);
 
 	AriaServices.factory("flash", ['$rootScope', function($rootScope) {
 		var queue = [];
-		var currentMessage = "";
+		var currentMessage = {};
 
 		$rootScope.$on("$routeChangeSuccess", function() {
 			currentMessage = queue.shift() || "";
-		  });
+		});
 
 		return {
-			setMessage: function(message) { queue.push(message); },
-	    getMessage: function() { return currentMessage; }
-	  	};
+			setMessage: function(message) {
+				var m = {};
+				if (message.type == null) {
+					m = {
+						type: 'alert-success',
+						details: message
+					}
+				}
+				else {
+					m = message;
+				}
+				queue.push(m);
+			},
+	    	getMessage: function() {
+				$rootScope.flashMessage = currentMessage;
+				return currentMessage;
+			},
+			showMessage: function() {
+				currentMessage = queue.shift() || "";
+				$rootScope.flashMessage = [currentMessage];
+				console.log(currentMessage);
+				console.log($rootScope.flashMessage);
+			}
+		};
 	}]);
 
 
@@ -101,7 +122,7 @@ var AriaDirective = angular.module('AriaDirective', []);
 
 
 	// ---- ---------------------------------------------------------------- ---
-    // ---- LONGIN                                                           ---
+    // ---- LOGIN                                                           ---
     // ---- ---------------------------------------------------------------- ---
 
 	AriaServices.run(['$rootScope', '$http', function($rootScope, $http) {
@@ -212,9 +233,31 @@ var AriaDirective = angular.module('AriaDirective', []);
 		}
     } ]);
 
+	// ---- ---------------------------------------------------------------- ---
+	// ---- MAILCHIMP SUBSCRIPTION                                                           ---
+	// ---- ---------------------------------------------------------------- ---
 
-
-
+	AriaServices.run(['$rootScope', '$http','flash', function($rootScope, $http, flash) {
+	    $rootScope.newsletter_subscribe = function(mail) {
+			$http({
+				method: 'POST',
+				url: '/api/mailing_list/'+mail.toLowerCase()+'',
+				headers: {'Content-Type': 'application/form-data'}
+				})
+			.success(function(data, status, headers, config) {
+				console.log(data);
+				flash.setMessage(data.detail);
+			})
+			.error(function(data, status) {
+				var message = {
+					type: 'alert-danger',
+					detail: data.detail,
+				}
+				flash.setMessage(message);
+				flash.showMessage();
+			});
+		}
+	} ]);
 
 	// ---- ---------------------------------------------------------------- ---
     // ----                                                                  ---
