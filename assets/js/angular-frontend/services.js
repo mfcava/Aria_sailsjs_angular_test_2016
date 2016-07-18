@@ -84,7 +84,9 @@ var AriaDirective = angular.module('AriaDirective', []);
 		return {
 			setMessage: function(message) {
 				var m = {};
+				// console.log(message);
 				if (message.type == null) {
+					// console.log('---: '+message);
 					m = {
 						type: 'alert-success',
 						details: message
@@ -93,7 +95,9 @@ var AriaDirective = angular.module('AriaDirective', []);
 				else {
 					m = message;
 				}
+				// console.log(m);
 				queue.push(m);
+				// console.log(queue);
 			},
 	    	getMessage: function() {
 				$rootScope.flashMessage = currentMessage;
@@ -102,8 +106,8 @@ var AriaDirective = angular.module('AriaDirective', []);
 			showMessage: function() {
 				currentMessage = queue.shift() || "";
 				$rootScope.flashMessage = [currentMessage];
-				console.log(currentMessage);
-				console.log($rootScope.flashMessage);
+				// console.log(currentMessage);
+				// console.log($rootScope.flashMessage);
 			}
 		};
 	}]);
@@ -239,22 +243,25 @@ var AriaDirective = angular.module('AriaDirective', []);
 
 	AriaServices.run(['$rootScope', '$http','flash', function($rootScope, $http, flash) {
 	    $rootScope.newsletter_subscribe = function(mail) {
+			console.log(mail);
 			$http({
 				method: 'POST',
 				url: '/api/mailing_list/'+mail.toLowerCase()+'',
 				headers: {'Content-Type': 'application/form-data'}
 				})
 			.success(function(data, status, headers, config) {
-				console.log(data);
-				flash.setMessage(data.detail);
+				console.log('--- success ---');
+				// console.log(data);
+				flash.setMessage('You have been subscribed to our Mailing list');
+				flash.showMessage();
 			})
 			.error(function(data, status) {
+				console.log('--- error ---');
 				var message = {
 					type: 'alert-danger',
 					detail: data.detail,
 				}
 				flash.setMessage(message);
-				flash.showMessage();
 			});
 		}
 	} ]);
@@ -316,4 +323,25 @@ var AriaDirective = angular.module('AriaDirective', []);
 				});
 			},
 		};
+	});
+
+	// ---- ---------------------------------------------------------------- ---
+    // ---- backImg: display background-image in the div                     ---
+	// ----          use with <div back-img="<some-image-url>" ></div>       ---
+    // ---- ---------------------------------------------------------------- ---
+	AriaServices.directive('backImg', function(){
+	    return function(scope, element, attrs){
+			// console.log(element);
+			// console.log(attrs);
+			attrs.$observe('backImg', function(value) {
+				if (value) {
+	        		var url = attrs.backImg;
+					var path = attrs.path;
+	        		element.css({
+	            		'background-image': 'url(' + path +'/'+url+')',
+	            		'background-size' : 'cover'
+	        		});
+				}
+			});
+	    };
 	});

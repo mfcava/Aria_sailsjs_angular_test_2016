@@ -71,6 +71,8 @@ module.exports = {
 		};
 		// sails.log.debug(options);
 		var reqGet = https.request(options, responseHandler(res)).end(requestData);
+        //
+        //
 	}
 
 };
@@ -92,7 +94,7 @@ function responseHandler(res) {
 			} catch (e) {
 				sails.log.warn('Could not parse response from options.hostname: ' + e);
 			}
-            sails.log.debug(res.locals.requestData)
+            // sails.log.debug(res.locals.requestData)
             if (res.locals.requestData.status != 400)
 			    res.json(JSON.parse(str));
             else {
@@ -101,7 +103,7 @@ function responseHandler(res) {
 		});
 
 		response.on('error', function(e) {
-			sails.log.debug('--- API ERROR ---')
+			sails.log.error('--- API ERROR ---')
 			sails.log.error(e);
 			res.json(e);
 		});

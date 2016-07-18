@@ -101,15 +101,15 @@
     Basics Styles and Mixing.
     ------------------------------------------------------------------------- */
 
-   h1 { font-family: 'Brandon_Bold', 'sans', sans-serif};
-   h2, h3, h4, h5, h6, p { font-family: 'Brandon_Medium', 'sans', sans-serif; line-height: 1.5em;};
-   p {
-     font-family: 'Open Sans', sans-serif;
-     font-weight: 300;
-     font-size: 1.5rem;
-     line-height: 1.7em;
-     margin-bottom: 2.0em;
-     }
+    h1 { font-family: 'Brandon_Bold', 'sans', sans-serif};
+    h2, h3, h4, h5, h6, p { font-family: 'Brandon_Medium', 'sans', sans-serif; line-height: 1.5em;};
+    p {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 1.5rem;
+        line-height: 1.7em;
+        margin-bottom: 2.0em;
+    }
 
    button {font-family: 'Brandon_light', 'sans';}
 
@@ -127,7 +127,7 @@
     }
 
     @mixin ribbon {
-        min-height: 80vh; background-color: rgba(0,0,0,0.25);
+        background-color: rgba(0,0,0,0.25);
         clear:right;
         border-radius: 0 0 0.5rem 0.5rem;
         margin-bottom: 20vh;
@@ -205,28 +205,38 @@
 
     ------------------------------------------------------------------------- */
     .home_page {
-        .row { margin: 0;}
+        .row { margin: 0; padding: 0}
         .home_banner {
-            padding: 0;
+            @extend .clearfix;
             min-height: 100vh;
             background-size: cover;
             background-repeat: no-repeat;
-            background-color: lighten(#000000,40%);
-            margin: 0;
+            background-color: lighten(#000,40%);
             position:relative;
             overflow: hidden;
-
             .latest {
+                @extend .col-lg-10;
+                @extend .col-lg-offset-1;
+                @extend .col-md-10;
+                @extend .col-md-offset-1;
+                @extend .col-xs-10;
+                @extend .col-xs-offset-1;
                 margin-top: 1em;
                 bottom:0;
                 position: absolute;
                 .latest-wrap {
+                    @extend .col-lg-3;
+                    @extend .col-md-3;
+                    @extend .col-md-3;
+                    @extend .col-xs-12;
+                    @extend .clearfix;
                     // background-color: rgba(#000, 0.2);
                     position: relative;
                     height: 75px;
                     padding-left: 0;
                 }
                 .latest-content {
+                    @extend .col-lg-10;
                     text-align: right;
                     position:absolute;
                     bottom:0;
@@ -259,6 +269,8 @@
                 }
             }
             .main-cta {
+                @extend .col-lg-10;
+                @extend .col-lg-offset-1;
                 height: 100%;
                 vertical-align: middle;
                 h2 {
@@ -329,3 +341,20 @@
         .row { margin: 0;}
         .ribbon { @include ribbon; }
     }
+
+    /*  ----------------------------------------------------------------------------
+
+        MEDIA QUERY
+
+        ------------------------------------------------------------------------- */
+    @media (max-width: $screen-xs-max) {  }
+    //@media (min-width: $screen-sm-min) {  }
+    @media (max-width: $screen-sm-max) {  }
+    //@media (min-width: $screen-md-min) {  }
+    @media (max-width: $screen-md-max) {
+        .home_page .home_banner .latest {
+            // @extend .col;
+        }
+
+    }
+    // @media (min-width: $screen-lg-min) {  }

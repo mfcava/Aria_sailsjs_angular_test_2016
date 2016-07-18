@@ -12,6 +12,9 @@
     .flash-message { position: fixed; top: 4.5em; z-index:1000}
 
     .footer {
+        .row {
+            margin:0px;
+        }
         bottom: 0; width: 100%;  height: 60px; background-color: $color_backgroud;
         h1 { color:  #FFF;
             .text-logo { font-size: 1.7rem;}
@@ -21,6 +24,11 @@
             li {
                 color:  #FFF;
                 height: 1.75em;
+                form {
+                    input{
+                        color: $font-color;
+                    }
+                }
             }
         }
     }
@@ -194,3 +202,49 @@
     Posts page - EDIT
     ------------------------------------------------------------------------- */
     .post-detail.edit .form-group.body textarea { height: 30em;}
+
+
+
+/*  ----------------------------------------------------------------------------
+    MEDIA QUERY
+    ------------------------------------------------------------------------- */
+
+    @media (max-width: $screen-xs-max) {
+        .section .second-2-1 .row {
+            background: linear-gradient(to bottom,
+                rgba(0,0,0,0.25) 0%,
+                rgba(0,0,0,0.25) 45%,
+                rgba(0,0,0,0.69) 45%,
+                rgba(0,0,0,0.69) 100%);
+            display: table-cell;
+        }
+        .section .second-2-1 .row .section-container {
+            height: 100vh;
+        }
+    }
+    // @media (min-width: $screen-sm-min) {
+    //    .section .second-2-1 .row .section-container {
+    //        height: 100vh;
+    //    }
+    //}
+    @media (max-width: $screen-sm-max) {
+        .section .second-2-1 .row {
+            background: linear-gradient(to bottom,
+                rgba(0,0,0,0.25) 0%,
+                rgba(0,0,0,0.25) 49%,
+                rgba(0,0,0,0.69) 49%,
+                rgba(0,0,0,0.69) 100%);
+            display: table-cell;
+        }
+        .section .second-2-1 .row .section-container {
+            height: 75vh;
+        }
+    }
+    @media (min-width: $screen-md-min) {
+        .section .second-2-1 .row .section-container {
+        }
+    }
+    @media (max-width: $screen-md-max) {
+        .section .second-2-1 .row .section-container {
+        }
+    }

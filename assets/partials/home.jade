@@ -4,12 +4,12 @@ include _flash_message.jade
 
 section#home_page.home_page
 	//- Section HOME PAGE
-	.row.home_banner(ng-repeat="post in coverPost",ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}")
+	.row.home_banner(ng-repeat="post in coverPost",back-img="{{post.coverImage}}",data-path="/api/got/image")
 		//- First Row
 		.home_banner_cut
 			//- Banner rotated overlay cut -
 			.extend
-		.col-lg-6.col-lg-offset-3.main-cta.clearfix
+		.main-cta
 			//- Main canvas - Content and Image
 			.home_intro
 				h2 {{post.title}}
@@ -18,11 +18,11 @@ section#home_page.home_page
 					a(href="/article/{{post.title_slug}}")
 						button.btn.btn-primary.home-cta(type="button") Discover more
 			//- Main canvas - END
-		.col-lg-10.col-lg-offset-1.latest
+		.latest
 			//- Bookmarks 
 			//-	Latest post from blog
-			.col-lg-3.latest-wrap.clearfix(ng-repeat="post in homePosts | limitTo:4",id="home-post-link-id-{{post.id}}")
-				.latest-content.col-lg-10
+			.latest-wrap(ng-repeat="post in homePosts | limitTo:4",id="home-post-link-id-{{post.id}}")
+				.latest-content
 					p
 						small {{post.tags[0].name}}
 						a(href="/article/{{post.title_slug}}") {{post.title}}
@@ -31,9 +31,9 @@ section#home_page.home_page
 		//- First Row - END
 	.section
 		//- Second Row
-		.first(id="home-post-link-id-{{post.id}}",ng-repeat="post in homePosts | limitTo:1",ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}")
+		.first(id="home-post-link-id-{{post.id}}",ng-repeat="post in homePosts | limitTo:1",back-img="{{post.coverImage}}",data-path="/api/got/image")
 			.row(class="{{post.layoutClass}}")
-				.col-lg-10.col-lg-offset-1
+				.col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.container
 					.col-lg-6.col-lg-offset-6.section-container
 						h2
 							small {{post.tags[0].name}}
@@ -45,10 +45,10 @@ section#home_page.home_page
 		//- Second Row - END 
 	.section
 		//- Tirdth Row
-		.second.second-2-1(ng-repeat="post in homePosts | limitTo:2",ng-if="$index > 0",ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+')'}")
+		.second.second-2-1(ng-repeat="post in homePosts | limitTo:2", ng-if="$index > 0", back-img="{{post.coverImage}}", data-path="/api/got/image")
 			.row
-				.col-lg-10.col-lg-offset-1
-					.col-lg-8.section-container(ng-repeat="p in homePosts | limitTo:2" ng-if="$index > 0")
+				.col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
+					.col-lg-8.col-md-8.col-xs-12.section-container(ng-repeat="p in homePosts | limitTo:2" ng-if="$index > 0")
 						h2
 							small {{p.tags[0].name}}
 							br
@@ -57,7 +57,7 @@ section#home_page.home_page
 						a(href="/article/{{p.title_slug}}")
 							button.btn.btn-primary.home-cta(type="button") Read More
 
-					.col-lg-4.section-container.black-fade.no-fade(ng-repeat="p in homePosts | limitTo:3",ng-if="$index > 1") 
+					.col-lg-4.col-md-4.col-xs-12.section.section-container.black-fade.no-fade(ng-repeat="p in homePosts | limitTo:3",ng-if="$index > 1") 
 						h2
 							small {{p.tags[0].name}}
 							br
@@ -73,10 +73,10 @@ section#home_page.home_page
 				.col-lg-10.col-lg-offset-1
 						//- Display latest 3 post
 						.home-article-column(ng-repeat="post in latestPosts | limitTo:3 ",id="home-post-column-id-{{post.id}}")
-							.col-lg-4.section-container
+							.col-lg-4.col-md-4.section-container
 								h2
 									small {{post.tags[0].name}}
-									span.col-lg-12.image.clearfix(ng-style="{'background-image':'url(/api/got/image/'+post.coverImage+'/50)'}")
+									span.col-lg-12.image.clearfix(back-img="{{post.coverImage}}/50",data-path="/api/got/image")
 									a(href="/article/{{post.title_slug}}") {{post.title}}
 								p {{post.content | limitTo:postPreviewLimit}}
 		//- Fourth Row

@@ -47,9 +47,9 @@ footer.footer
                     li
                         h2 Newsletter Subscription
                     li
-                        form.email-signup.mailer(id="newsletter_subscribe", ng-submit="newsletter_subscribe('gg.it')")
-                            input(id="email",name="email",placeholder="Email Address",type="email")
-                            label(for="email") To receive our updates via email
+                        form.email-signup.mailer(id="newsletter",name="newsletter",ng-submit="newsletter_subscribe(newsletter.newsletter_email.$viewValue)")
+                            input(id="e_mail",name="newsletter_email",ng-model="newsletter_email",placeholder="Email Address",type="e_mail")
+                            label(for="e_mail") To receive our updates via email
     .clearfix
     //- ------------------------------
     // FOOTER END
