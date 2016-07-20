@@ -1,16 +1,16 @@
 doctype html
 html(lang="it",ng-app="AriaApp")
-    head(itemscope, itemtype="http://schema.org/WebSite",ng-switch="metadata.title")
+    head
         //-
             Meta data description...
             ------------------------------
             Add dynamic metadata description and microdata for - SITE NAME
 
-        title(ng-switch-when="{{metadata_def.title}}", itemprop='name') {{metadata.title}}
+        title(ng-switch-when="{{metadata_def.title}}") {{metadata.title}}
         title(ng-switch-default) {{metadata.title}}
         meta(description="{{metadata.description}}", ng-if="metadata.description")
         meta(whatever="{{ metadata.keywords}}", ng-if="metadata.keywords")
-        link(rel="canonical",href="/{{metadata.canonical}}", ng-switch-when="{{metadata_def.canonical}}", itemprop='name')
+        link(rel="canonical",href="/{{metadata.canonical}}", ng-switch-when="{{metadata_def.canonical}}")
         link(rel="canonical",href="/{{metadata.canonical}}", ng-switch-default)
 
         //- Viewport mobile tag for sensible mobile support

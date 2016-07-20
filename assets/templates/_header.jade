@@ -14,9 +14,9 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
                 img(alt="Aria Projects v.0.01",src="/images/logo.gif")
         .collapse.navbar-collapse(id="bs-example-navbar-collapse-1")
             //- Main Menu Link
-            ul.nav.navbar-nav
-                li.active
-                    a(href="/")
+            ul.nav.navbar-nav(itemscope,itemtype="http://www.schema.org/SiteNavigationElement")
+                li.active(itemprop="name")
+                    a(href="/",itemprop="url")
                         span.text-logo
                             span.capital
                                 |M
@@ -26,10 +26,10 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
                             |arketing
                         span.sr-only.
                             (current)
-                li
-                    a(href="/post") Posts
-                li
-                    a(href="/user") Users
+                li(itemprop="name")
+                    a(href="/post",itemprop="url") Posts
+                li(itemprop="name")
+                    a(href="/user",itemprop="url") Users
             ul.nav.navbar-nav.navbar-right
                 //- Menu Tools
                 li(ng-show="Token")
