@@ -90,8 +90,8 @@ article.post-detail.edit
 							//- content
 							.form-group.body
 								label(for="postContent") Body
-								textarea#content.form-control(placeholder="Insert your post...",ng-model="post.content") {{post.content}}
-							
+								// textarea(placeholder="Insert your post...",ng-model="post.content") {{post.content}}
+								textarea#content.form-control(ui-tinymce="tinymceOptions",ng-model="tinymceModel",ng-change="updateHtml()")
 							//- Layout Helper 
 							.form-group
 								label(for="layoutClass") Layout Class

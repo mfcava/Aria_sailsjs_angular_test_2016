@@ -40,6 +40,8 @@
 ################################################
 
 config/local.js
+assets/esecutivi/*
+assets/upload/*
 
 
 

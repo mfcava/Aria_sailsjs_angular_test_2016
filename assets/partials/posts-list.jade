@@ -11,7 +11,7 @@ section#contents_list
 						| article wrote by 
 						a(href="/user/{{cover.owned.id}}") {{cover.owned.nickname}}
 
-						p {{cover.content | limitTo:postPreviewLimit }}...
+						p {{cover.content | htmlToPlaintext | limitTo:postPreviewLimit }}...
 						center
 							a(href="/post/{{cover.id}}/")
 								button.btn.btn-primary.home-cta(type="button") Read More
@@ -28,7 +28,7 @@ section#contents_list
 									a(href="/user/{{post.owned.id}}") {{post.owned.nickname}}
 								br
 								a(href="/post/{{post.id}}/") {{post.title}}
-							p {{post.content | limitTo:postPreviewLimit }}...
+							p {{post.content | htmlToPlaintext | limitTo:postPreviewLimit }}...
 							center
 								a(href="/post/{{post.id}}/")
 									button.btn.btn-primary.home-cta(type="button") Read More

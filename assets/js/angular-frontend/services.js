@@ -10,9 +10,13 @@
 
 var AriaServices  = angular.module('AriaServices', ['ngResource']);
 var AriaDirective = angular.module('AriaDirective', []);
+var AriaModules   = angular.module('AriaModules', []);
 
-
-
+	AriaServices.filter('htmlToPlaintext', function() {
+		return function(text) {
+			return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+		};
+	});
 
 
 

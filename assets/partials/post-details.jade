@@ -1,0 +1,33 @@
+article.post-detail(itemscope,itemtype="http://schema.org/Article")
+	meta(itemscope,itemprop="mainEntityOfPage",itemType="https://schema.org/WebPage",itemid="https://google.com/article")
+	.container-fluid
+		.row
+			.col-lg-6.coverpad
+				.cover.fill(back-img="{{post.coverImage}}",data-path="/api/got/image")
+			.col-lg-6
+				h1.col-lg-12 {{post.title}}
+					small
+						i added by
+						a(ng-href="#/user/{{post.owned.id}}") {{post.owned.nickname}}
+				.col-lg-12.btn-group.tool(role="group" aria-label="...",ng-show="post.owned.id = $root.currentUser")
+					button.btn.btn-default.btn-sm(type="button",ng-click="deletePost(post.id)") Delete
+					a.btn.btn-default.btn-sm(ng-href="/post/{{post.id}}/edit",type="button") Modify
+					button.btn.btn-default.btn-sm(type="button",ng-click="") New
+				p.col-lg-12(ng-bind-html="post.content")
+				
+				aside.col-lg-12
+					.panel.panel-default
+						.panel-heading
+							h3 Related Tag
+						.panel-body
+							span.label.label-primary.post-tag(ng-repeat="tag in post.tags",class="") {{tag.name}}
+
+					.panel.panel-default
+						.panel-heading
+							h3.panel-title Related Contents
+						.panel-body
+
+					.panel.panel-default
+						.panel-heading
+							h3.panel-title Comments
+						.panel-body(ng-include="partials/comments.html")

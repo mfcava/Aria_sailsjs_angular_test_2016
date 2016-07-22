@@ -305,14 +305,34 @@ AriaControllers.controller('UserShowCtrl', ['$scope', '$routeParams', 'User','$h
     // ---- ------------------------------------------------------------------- ---
     AriaControllers.controller('PostEditCtrl', ['$scope', '$routeParams', 'Post', 'Metatag', '$location', 'flash', '$http', function($scope, $routeParams, Post, Metatag, $location, flash, $http ) {
         $scope.flash = flash;
-        console.log('Controller.js');
+        $scope.tinymceModel = 'Loading Content';
+        $scope.post;
+        // console.log('Controller.js');
         if ( angular.isUndefined($routeParams.PostId) ) {
             $scope.post = new Post();
         } else {
-            $scope.post = Post.get({PostId: $routeParams.PostId});
+            Post.get({PostId: $routeParams.PostId})
+                .$promise.then( function(p) {
+                    console.log(p);
+                    $scope.post = p;
+                    $scope.tinymceModel = $scope.post.content;
+                });
+
         }
         $scope.autocompleteTags = false;
         $scope.searchTag = '';
+
+        // ---- --------------------------------------------------------------- ---
+        // ---- Tinymce Integration                                             ---
+        // ---- --------------------------------------------------------------- ---
+        $scope.updateHtml = function() {
+            console.log('Editor content:', $scope.tinymceModel);
+            $scope.post.content = $scope.tinymceModel;
+        };
+        $scope.tinymceOptions = {
+            plugins: 'link image code',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+        };
 
         // Function for ng-click 'deletePost':
         $scope.deletePost = function () {

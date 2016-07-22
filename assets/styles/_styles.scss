@@ -87,9 +87,8 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .section-container { min-height: 33vh; margin-top: 1.5em; margin-bottom:1.5em}
+        .section-container { margin-top: 1.5em; margin-bottom:1.5em}
         .first {
-            display: table;
             min-height: 50vh;
             background-size: cover;
             background-repeat: no-repeat;
@@ -120,7 +119,6 @@
     .section {
         @include section-wide;
         .row {
-            display: table-cell;
             height:  inherit;
             @include white-fade;
             @include black-fade;

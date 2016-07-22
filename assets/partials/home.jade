@@ -13,7 +13,7 @@ section#home_page.home_page
 			//- Main canvas - Content and Image
 			.home_intro
 				h2 {{post.title}}
-				p  {{post.content | limitTo:postPreviewLimit}}
+				p  {{post.content | htmlToPlaintext | limitTo:postPreviewLimit}}
 				center
 					a(href="/article/{{post.title_slug}}")
 						button.btn.btn-primary.home-cta(type="button") Discover more
@@ -39,7 +39,7 @@ section#home_page.home_page
 							small {{post.tags[0].name}}
 							br
 							| {{post.title}}
-						p {{post.content | limitTo:postPreviewLimit}}
+						p {{post.content | htmlToPlaintext | limitTo:postPreviewLimit}}
 						a(href="/article/{{post.title_slug}}")
 							button.btn.btn-primary.home-cta(type="button") Read More
 		//- Second Row - END 
@@ -53,7 +53,7 @@ section#home_page.home_page
 							small {{p.tags[0].name}}
 							br
 							| {{p.title}}
-						p {{p.content | limitTo:postPreviewLimit}}
+						p {{p.content | htmlToPlaintext | limitTo:postPreviewLimit}}
 						a(href="/article/{{p.title_slug}}")
 							button.btn.btn-primary.home-cta(type="button") Read More
 
@@ -62,7 +62,7 @@ section#home_page.home_page
 							small {{p.tags[0].name}}
 							br
 							| {{p.title}}
-						p {{p.content | limitTo:postPreviewLimit}}
+						p {{p.content | htmlToPlaintext | limitTo:postPreviewLimit}}
 						a(href="/article/{{p.title_slug}}")
 							button.btn.btn-primary.home-cta(type="button") Read More
 		//- Tirdth Row - END
@@ -78,7 +78,7 @@ section#home_page.home_page
 									small {{post.tags[0].name}}
 									span.col-lg-12.image.clearfix(back-img="{{post.coverImage}}/50",data-path="/api/got/image")
 									a(href="/article/{{post.title_slug}}") {{post.title}}
-								p {{post.content | limitTo:postPreviewLimit}}
+								p {{post.content | htmlToPlaintext | limitTo:postPreviewLimit}}
 		//- Fourth Row
 	.clearfix
 	//- Section HOME PAGE - END

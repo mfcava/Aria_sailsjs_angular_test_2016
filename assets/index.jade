@@ -1,6 +1,6 @@
 doctype html
 html(lang="it",ng-app="AriaApp")
-    head
+    head(ng-switch="metadata.title")
         //-
             Meta data description...
             ------------------------------
@@ -119,23 +119,32 @@ html(lang="it",ng-app="AriaApp")
             ga('create', 'UA-79658134-1', { 'cookieDomain': 'none' });
         // GOOGLE ANALYTICS END
     
+        // VENDOR SCR 
+        script(src="/vendor/01_tinymce/01_tinymce.min.js")
+        // VENDOR SCR END
+    
         // SCRIPTS
         script(src="/js/dependencies/01_jquery/jquery.js")
-        script(src="/js/dependencies/02_angular.min.js")
-        script(src="/js/dependencies/03_angular/angular-angulartics/angulartics-debug.js")
-        script(src="/js/dependencies/03_angular/angular-angulartics/angulartics-ga.min.js")
-        script(src="/js/dependencies/03_angular/angular-angulartics/angulartics.js")
-        script(src="/js/dependencies/03_angular/angular-flow/ng-flow-standalone.min.js")
-        script(src="/js/dependencies/03_angular/angular-ng-store/ngStorage.min.js")
-        script(src="/js/dependencies/03_angular/angular-resource.min.js")
-        script(src="/js/dependencies/03_angular/angular-route.min.js")
-        script(src="/js/dependencies/03_angular/ng-infinite-scroll.min.js")
-        script(src="/js/dependencies/04_bootstrap.js")
-        script(src="/js/dependencies/05_sails.io.js")
+        script(src="/js/dependencies/02_angular.js")
+        script(src="/js/dependencies/04_angular/angular-angulartics/angulartics-debug.min.js")
+        script(src="/js/dependencies/04_angular/angular-angulartics/angulartics-ga.min.js")
+        script(src="/js/dependencies/04_angular/angular-angulartics/angulartics.min.js")
+        script(src="/js/dependencies/04_angular/angular-flow/ng-flow-standalone.min.js")
+        script(src="/js/dependencies/04_angular/angular-ng-store/ngStorage.min.js")
+        script(src="/js/dependencies/04_angular/angular-resource.min.js")
+        script(src="/js/dependencies/04_angular/angular-route.min.js")
+        script(src="/js/dependencies/04_angular/angular-sanitize.min.js")
+        script(src="/js/dependencies/04_angular/angular-tinymce/tinymce.min.js")
+        script(src="/js/dependencies/04_angular/ng-infinite-scroll.min.js")
+        script(src="/js/dependencies/05_bootstrap.js")
+        script(src="/js/dependencies/06_sails.io.js")
         script(src="/js/angular-frontend/app.js")
         script(src="/js/angular-frontend/controllers.js")
         script(src="/js/angular-frontend/services.js")
         // SCRIPTS END
+        
+
+
     //- BODY END
     //- BODY END  
     

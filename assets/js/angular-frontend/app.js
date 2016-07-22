@@ -12,7 +12,9 @@ var AriaApp = angular.module('AriaApp', [
 	'AriaDirective',
 	'angulartics',
 	'angulartics.google.analytics',
-	'infinite-scroll'
+	'infinite-scroll',
+	'ui.tinymce',
+	'ngSanitize'
 ]);
 
 
