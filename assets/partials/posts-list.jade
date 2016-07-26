@@ -1,20 +1,19 @@
 section#contents_list
 	//- Section POST
 	.container-fluid
-		.row.home-main-post(ng-repeat="cover in latestPost | limitTo:1",id="post-{{cover.id}}",ng-style="{'background-image':'url(/api/got/image/'+cover.coverImage+')'}")
+		.row.o-page-cover.o-page-cover__image-banner(ng-repeat="cover in latestPost | limitTo:1",id="post-{{cover.id}}",ng-style="{'background-image':'url(/api/got/image/'+cover.coverImage+')'}")
 			//- First Row
-			.col-lg-4.col-lg-offset-1.ribbon
-				.home_intro
-					h2
-						a(href="/post/{{cover.id}}/") {{cover.title}}
-					h3 
-						| article wrote by 
-						a(href="/user/{{cover.owned.id}}") {{cover.owned.nickname}}
+			.o-page-cover__home.o-page-cover__home_ribbon.clearfix
+				h1
+					a(href="/post/{{cover.id}}/") {{cover.title}}
+				h2 
+					| article wrote by 
+					a(href="/user/{{cover.owned.id}}") {{cover.owned.nickname}}
 
-						p {{cover.content | htmlToPlaintext | limitTo:postPreviewLimit }}...
-						center
-							a(href="/post/{{cover.id}}/")
-								button.btn.btn-primary.home-cta(type="button") Read More
+				p {{cover.content | htmlToPlaintext | limitTo:postPreviewLimit*2 }}...
+					center
+						a(href="/post/{{cover.id}}/")
+							button.btn.btn-primary.home-cta(type="button") Read More
 			//- First Row - END
 		.home-other-post(infinite-scroll="setPage(currentPage+1)",infinite-scroll-distance="3")
 			//- Second Row and following row...

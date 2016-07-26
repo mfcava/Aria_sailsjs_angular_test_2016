@@ -2,33 +2,34 @@
 include _flash_message.jade
 
 
-section#home_page.home_page
+section#home_page.o-page-cover
 	//- Section HOME PAGE
-	.row.home_banner(ng-repeat="post in coverPost",back-img="{{post.coverImage}}",data-path="/api/got/image")
+	.row.o-page-cover__image-banner(ng-repeat="post in coverPost",back-img="{{post.coverImage}}",data-path="/api/got/image")
 		//- First Row
-		.home_banner_cut
+		.o-page-cover__home-banner-cut
 			//- Banner rotated overlay cut -
-			.extend
-		.main-cta
+			.o-page-cover__home-banner-cut__extend
+		.o-page-cover__home.o-page-cover__home_home_page.clearfix
 			//- Main canvas - Content and Image
-			.home_intro
-				h2 {{post.title}}
-				p  {{post.content | htmlToPlaintext | limitTo:postPreviewLimit}}
-				center
-					a(href="/article/{{post.title_slug}}")
-						button.btn.btn-primary.home-cta(type="button") Discover more
+			h1 {{post.title}}
+			h2  {{post.content | htmlToPlaintext | limitTo:postPreviewLimit}}
+			center
+				a(href="/article/{{post.title_slug}}")
+					button.btn.btn-primary.home-cta(type="button") Discover more
 			//- Main canvas - END
-		.latest
+		.o-page-cover__latest-posts
 			//- Bookmarks 
 			//-	Latest post from blog
-			.latest-wrap(ng-repeat="post in homePosts | limitTo:4",id="home-post-link-id-{{post.id}}")
-				.latest-content
+			.o-page-cover__latest-posts__wrap(ng-repeat="post in homePosts | limitTo:4",id="home-post-link-id-{{post.id}}")
+				.o-page-cover__latest-posts__wrap__latest-content
 					p
 						small {{post.tags[0].name}}
 						a(href="/article/{{post.title_slug}}") {{post.title}}
 			//- Bookmarks 
 			.clearfix
 		//- First Row - END
+		//-
+		//-
 	.section
 		//- Second Row
 		.first(id="home-post-link-id-{{post.id}}",ng-repeat="post in homePosts | limitTo:1",back-img="{{post.coverImage}}",data-path="/api/got/image")

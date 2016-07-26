@@ -9,19 +9,6 @@ var AriaControllers = angular.module('AriaControllers', ['flow']);
 
 
 
-AriaControllers.controller('AriaCtrl', ['$scope', 'Post', function($scope, Post ) {
-    // console.log('Controller.js - Root Controller');
-    // $scope.$emit('newPageLoaded', {
-    //  'title': 'Millenials Marketing',
-    //  'description': 'Marketing for millenials brand',
-	//  'keywords': 'Marketing, Millenials, Brands',
-    // });
-
-} ]);
-
-
-
-
 AriaControllers.controller('AriaCtrlHome', ['$scope', 'Post', function($scope, Post ) {
     // console.log('Controller.js - Root Controller');
     $scope.$emit('newPageLoaded', {
@@ -36,8 +23,6 @@ AriaControllers.controller('AriaCtrlHome', ['$scope', 'Post', function($scope, P
     $scope.coverPost   = Post.query({limit: 1, sort: $scope.sortBy, where: '{"homePageCover":"true","publishedBy": {"<=": "'+today+'", "!":"null"}}' } );
     $scope.homePosts   = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePageCover":{"!":["true","null"]},"homePage":"true"}' } );
     $scope.latestPosts = Post.query({skip: 0 ,limit: 3, sort: $scope.sortBy, where: '{"homePage": [null,"false"]}' } );
-
-
 
 } ]);
 

@@ -15,7 +15,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
         .collapse.navbar-collapse(id="bs-example-navbar-collapse-1")
             //- Main Menu Link
             ul.nav.navbar-nav(itemscope,itemtype="http://www.schema.org/SiteNavigationElement")
-                li.active(itemprop="name")
+                li(itemprop="name",ng-class="{active: $state.current.name === '/'}")
                     a(href="/",itemprop="url")
                         span.text-logo
                             span.capital
@@ -24,16 +24,18 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
                             span.capital
                                 |M
                             |arketing
-                        span.sr-only.
-                            (current)
+                        span.sr-only
+                            |(current)
                 li(itemprop="name")
                     a(href="/post",itemprop="url") Posts
                 li(itemprop="name")
                     a(href="/user",itemprop="url") Users
             ul.nav.navbar-nav.navbar-right
                 //- Menu Tools
+                li
+                    button.btn.btn-primary.btn-primary__negative Iscriviti alla newsletter
                 li(ng-show="Token")
-                    a(href="/post/new") New Posts
+                    a(href="/post/new") Nuovo Post
                 li.dropdown
                     a.dropdown-toggle(href="",data-toggle="dropdown",role="button",aria-expanded="false") 
                         |Login
